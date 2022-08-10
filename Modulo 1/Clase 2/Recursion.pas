@@ -1,35 +1,38 @@
-program Recursion;
 
-var 
+Program Recursion;
+
+Var 
   num, maximo: integer;
 
-procedure digitoMaximo(n: integer; max: integer);
-var
+Procedure digitoMaximo(n: integer; max: integer);
+
+Var 
   dig: integer;
-begin
-  dig:= n mod 10;
-  if ( dig > max ) then
-    max:= dig;
-  n:= n div 10;
-  if (n <> 0) then
+Begin
+  dig := n Mod 10;
+  If ( dig > max ) Then
+    max := dig;
+  n := n Div 10;
+  If (n <> 0) Then
     digitoMaximo(n, max);
   writeln('max: ', max);
-end;
+End;
 
-Function digitoMaximo2(n: integer; max: integer):real;
-var
+Function digitoMaximo2(n: integer; max: integer): real;
+
+Var 
   dig: integer;
-begin
-  dig:= n mod 10;
-  if ( dig > max ) then
-    max:= dig;
-  n:= n div 10;
-  if (n <> 0) then
+Begin
+  dig := n Mod 10;
+  If ( dig > max ) Then
+    max := dig;
+  n := n Div 10;
+  If (n <> 0) Then
     digitoMaximo2 := digitoMaximo2(n, max)
-  else
+  Else
     digitoMaximo2 := max;
   writeln('max: ', max);
-end;
+End;
 
 Begin
   maximo := -1;
@@ -37,6 +40,5 @@ Begin
   readln (num);
   //digitoMaximo (num, maximo);
   //writeln ( 'El digito maximo del numero ', num, ' es: ', maximo);
-  writeln ( 'El digito maximo del numero ', num, ' es: ', digitoMaximo2(num, maximo):2:2);
+  writeln ( 'El digito maximo del numero ', num, ' es: ', digitoMaximo2(num, maximo): 2: 2);
 End.
-

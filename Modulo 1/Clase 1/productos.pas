@@ -1,127 +1,136 @@
+
 Program productos;
-Uses
-     sysutils;
-Type
-     producto = record
-       codigo: integer;
-	  nombre: string;
-	  marca: string;
-	  anio: 2000..2022;
-	  precio: real;
-     end;
 
-     listaProductos = ^nodoLista;
-     nodoLista = record
-       dato: producto;
-       sig: listaProductos;
-     end;
+Uses sysutils;
+
+Type 
+  producto = Record
+    codigo: integer;
+    nombre: string;
+    marca: string;
+    anio: 2000..2022;
+    precio: real;
+  End;
+
+  listaProductos = ^nodoLista;
+  nodoLista = Record
+    dato: producto;
+    sig: listaProductos;
+  End;
 
 
 
-Procedure agregarAdelante(var l: listaProductos; p: producto);
-var
-   aux: listaProductos;
-begin
-     new(aux);
-     aux^.dato := p;
-     aux^.sig := l;
-     l:= aux;
-end;
+Procedure agregarAdelante(Var l: listaProductos; p: producto);
+
+Var 
+  aux: listaProductos;
+Begin
+  new(aux);
+  aux^.dato := p;
+  aux^.sig := l;
+  l := aux;
+End;
 
 
 
 {crearLista - Genera una lista con productos aleatorios}
-procedure crearLista(var l: listaProductos);
-var
-   i,j:integer;
-   p: producto;
-   
-   v : array [1..10] of string;
-begin
-     v[1]:= 'Abercom';
-     v[2]:= 'Aluminium';
-     v[3]:= 'ClearWindows';
-     v[4]:= 'IndArg';
-     v[5]:= 'La Foret';
-     v[6]:= 'Open';
-     v[7]:= 'Portal';
-     v[8]:= 'Puertamania';
-     v[9]:= 'PVCPremium';
-     v[10]:= 'Ventalum';
+Procedure crearLista(Var l: listaProductos);
 
-	 for i:=random(10) downto 1 do {for de marca}
-	 begin
-	     p.marca:= v[i];
-		 for j:=random(5) downto 1 do {for de anio}
-	     begin
-		 	p.anio:= 2016+j;
-			p.codigo:= random(10);
-			while (p.codigo <> 0) do Begin
-				p.nombre:= Concat('Producto-', IntToStr(random (200)));
-				p.precio := random(1000000);
-				agregarAdelante(l, p);
-                p.codigo:= random(10);
-		   end;
-		 end;
-	 end;
-end;
+Var 
+  i,j: integer;
+  p: producto;
+
+  v : array [1..10] Of string;
+Begin
+  v[1] := 'Abercom';
+  v[2] := 'Aluminium';
+  v[3] := 'ClearWindows';
+  v[4] := 'IndArg';
+  v[5] := 'La Foret';
+  v[6] := 'Open';
+  v[7] := 'Portal';
+  v[8] := 'Puertamania';
+  v[9] := 'PVCPremium';
+  v[10] := 'Ventalum';
+
+  For i:=random(10) Downto 1 Do {for de marca}
+    Begin
+      p.marca := v[i];
+      For j:=random(5) Downto 1 Do {for de anio}
+        Begin
+          p.anio := 2016+j;
+          p.codigo := random(10);
+          While (p.codigo <> 0) Do
+            Begin
+              p.nombre := Concat('Producto-', IntToStr(random (200)));
+              p.precio := random(1000000);
+              agregarAdelante(l, p);
+              p.codigo := random(10);
+            End;
+        End;
+    End;
+End;
 
 
 {imprimir - Muestra en pantalla el producto}
-procedure imprimir(p: producto);
-begin
-     with (p) do begin
-          writeln('Producto', nombre, ' con codigo ',codigo, ': ', marca, ' Anio:', anio, ' Precio: ', precio:2:2);
-     end;
-end;
+Procedure imprimir(p: producto);
+Begin
+  With (p) Do
+    Begin
+      writeln('Producto', nombre, ' con codigo ',codigo, ': ', marca, ' Anio:', anio, ' Precio: ', precio:2:2);
+    End;
+End;
 
 
 {imprimirLista - Muestra en pantalla la lista l}
-procedure imprimirLista(l: listaProductos);
-begin
-     while (l <> nil) do begin
-          if(l^.dato.marca = 'Abercom')and((l^.dato.anio >= 2018) and (l^.dato.anio <= 2020))and(l^.dato.precio > 100000)then
-            imprimir(l^.dato);
-          l:= l^.sig;
-     end;
-end;
+Procedure imprimirLista(l: listaProductos);
+Begin
+  While (l <> Nil) Do
+    Begin
+      If (l^.dato.marca = 'Abercom')And((l^.dato.anio >= 2018) And (l^.dato.anio <= 2020))And(l^.dato.precio > 100000)Then
+        imprimir(l^.dato);
+      l := l^.sig;
+    End;
+End;
 
 Procedure Reporte(l:listaProductos);
-var
-  marcaAct:string;
+
+Var 
+  marcaAct: string;
   anioAct: integer;
   TotAnio, TotMarca: real;
-begin
-  while(l<>nil)do 
-    begin
-      TotMarca:= 0;
-      marcaAct:=l^.dato.marca;
+Begin
+  While (l<>Nil) Do
+    Begin
+      TotMarca := 0;
+      marcaAct := l^.dato.marca;
       writeln('Marca: ', l^.dato.marca);
-      while(l<>nil)and(marcaAct = l^.dato.marca)do 
-        begin
-          TotAnio:= 0;
-          anioAct:= l^.dato.anio;
+      While (l<>Nil)And(marcaAct = l^.dato.marca) Do
+        Begin
+          TotAnio := 0;
+          anioAct := l^.dato.anio;
           writeln('Anio: ', l^.dato.anio);
-          while(l<>nil)and(marcaAct = l^.dato.marca)and(anioAct = l^.dato.anio)do 
-            begin
+          While (l<>Nil)And(marcaAct = l^.dato.marca)And(anioAct = l^.dato.anio) Do
+            Begin
               writeln(l^.dato.codigo, ' ', l^.dato.nombre, ' ', l^.dato.precio:2:2);
-              TotAnio:= TotAnio + 1;
-              l:=l^.sig;
-            end;
-          TotMarca:= TotMarca + TotAnio;
+              TotAnio := TotAnio + 1;
+              l := l^.sig;
+            End;
+          TotMarca := TotMarca + TotAnio;
           writeln('Total productos anio ', anioAct,': ', TotAnio:2:2);
-        end;
+        End;
       writeln('Total productos ', marcaAct,': ', TotMarca:2:2);
-    end;
-end;
-var
-   l: listaProductos;
-begin
-     Randomize;
-     l:= nil;
-     crearLista(l);
-     writeln ('Lista generada: ');
-     imprimirLista(l);
-     writeln('-------------------------------');
-     Reporte(l);
-end.
+    End;
+End;
+
+Var 
+  l: listaProductos;
+Begin
+  Randomize;
+  l := Nil;
+  crearLista(l);
+  writeln ('Lista generada: ');
+  imprimirLista(l);
+  writeln('-------------------------------');
+  Reporte(l);
+End.

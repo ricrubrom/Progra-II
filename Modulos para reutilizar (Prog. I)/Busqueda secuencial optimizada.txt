@@ -1,0 +1,9 @@
+Function BuscoPosElemOrd (x: integer; v:Vector; dimL: Indice): Indice;
+  var pos : Indice;
+begin
+  pos:=1;
+  while (pos <= dimL) and (x > v[pos]) do
+    pos:=pos+1;
+  if ( pos > dimL ) or (x < v [pos]) then pos:=0;
+  BuscoPosElemOrd:= pos;
+end;

@@ -1,0 +1,15 @@
+Procedure InsertarOrd(var L:lista; A:DATOS_A_INGRESAR);
+  var nue, act, ant: lista;
+  begin
+    new(nue);
+    nue^.datos:= A;
+    act:= L; ant:= L;
+    while(act <> nil)and(nue^.datos.categ > act^.datos.categ)do {de menor a mayor}
+      begin {con categ = por lo que queremos ordenar}
+        ant:= act;
+        act:= act^.sig;
+      end;
+    if(ant = act)then L:= nue
+    else ant^.sig:= nue;
+    nue^.sig:= act;
+  end; 

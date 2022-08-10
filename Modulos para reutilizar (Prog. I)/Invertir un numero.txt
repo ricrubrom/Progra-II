@@ -1,0 +1,12 @@
+Function Invertir(num:integer):integer;
+var dig, aux:integer;
+begin
+  aux:=0;
+  while(num<>0)do 
+    begin
+      dig:= num mod 10;
+      aux:=(aux * 10) + dig;
+      num:= num div 10;
+    end;
+  Invertir:= aux;
+end;

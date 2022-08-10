@@ -1,0 +1,11 @@
+Procedure LiberarMemoria(var L:lista);
+var
+  aux: lista;
+begin
+  while(L <> nil)do 
+    begin
+      aux:= L;
+      L:= L^.sig;
+      dispose(aux);
+    end;
+end;

@@ -1,0 +1,10 @@
+Procedure AGREGAR (var v: vector; var dimL: integer; elemento: integer; var exito: boolean);
+Begin
+  exito:= false;
+  If (dimL < dimF) then 
+    begin
+      exito:= true;
+      dimL:= dimL+1; 
+      v [dimL]:= elemento;
+    end;
+end;

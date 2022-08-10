@@ -1,0 +1,30 @@
+Procedure EliminarRecoorriendo1(var L:lista);
+var
+  act, ant: lista;
+begin
+  act:= L; ant:= L;
+  while(act <> nil)do 
+    begin
+      if(condicion1)or(condicion2)then
+        begin
+          if(act = ant)then
+            begin
+              L:= L^.sig;
+              dispose(act);
+              act:= L;
+              ant:= L;
+            end
+          else 
+            begin
+              ant^.sig:= act^.sig;
+              dispose(act);
+              act:= ant^.sig;
+            end;
+        end
+      else 
+        begin
+          ant:= act;
+          act:= act^.sig;
+        end;
+    end;
+end;

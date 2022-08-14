@@ -1,0 +1,12 @@
+Procedure insertar (Var a:arbol; n:integer);
+Begin
+  If a = Nil Then
+    Begin
+      new (a);
+      a^.valor := n;
+      a^.izq := Nil;
+      a^.der := Nil;
+    End
+  Else If a^.valor>n Then insertar (a^.izq,n)
+  Else If a^.valor<n Then insertar (a^.der,n)
+End;

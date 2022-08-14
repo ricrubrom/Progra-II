@@ -1,0 +1,9 @@
+Procedure enorden (a:arbol);
+Begin
+  If a<>Nil Then
+    Begin
+      enorden (a^.izq);
+      write (' ', a^.valor);
+      enorden (a^.der)
+    End;
+End;

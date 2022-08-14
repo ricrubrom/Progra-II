@@ -1,0 +1,25 @@
+Procedure cargaarbol (Var a:arbol);
+
+Procedure insertar (Var a:arbol; n:integer);
+Begin
+  If a = Nil Then
+    Begin
+      new (a);
+      a^.valor := n;
+      a^.izq := Nil;
+      a^.der := Nil;
+    End
+  Else If a^.valor>n Then insertar (a^.izq,n)
+  Else If a^.valor<n Then insertar (a^.der,n)
+End;
+
+Var n: Integer;
+Begin
+  write ('Inserte numero (0 Finaliza la carga): ');
+  ReadLn(n);
+  If n<>0 Then
+    Begin
+      insertar (a,n);
+      cargaarbol (a)
+    End;
+End;

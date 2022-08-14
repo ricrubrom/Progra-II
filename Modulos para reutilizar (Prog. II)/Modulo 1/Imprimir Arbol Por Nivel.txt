@@ -1,0 +1,54 @@
+Procedure ImprimirPorNivel(a: arbol);
+
+
+Procedure InsertarOrd(Var L:lista2; num, lvl: integer);
+
+Var nue, act, ant: lista2;
+Begin
+  new(nue);
+  nue^.datos.num := num;
+  nue^.datos.lvl := lvl;
+  act := L;
+  ant := L;
+  While (act <> Nil)And(nue^.datos.lvl > act^.datos.lvl) Do
+    Begin
+      ant := act;
+      act := act^.sig;
+    End;
+  If (ant = act)Then L := nue
+  Else ant^.sig := nue;
+  nue^.sig := act;
+End;
+
+Procedure PreOrden(a:arbol; Var L:lista2; lvl: integer);
+Begin
+  If (a <> Nil)Then
+    Begin
+      InsertarOrd(L, a^.valor, lvl);
+      PreOrden(a^.der, L, lvl + 1);
+      PreOrden(a^.izq, L, lvl + 1);
+    End;
+End;
+
+
+
+Var 
+  L, aux: lista2;
+  lvlAct: integer;
+Begin
+  L := Nil;
+  PreOrden(a, L, 1);
+  While (L <> Nil) Do
+    Begin
+      writeln();
+      lvlAct := L^.datos.lvl;
+      write('Nivel ', L^.datos.lvl,': ');
+      While (L<>Nil) And (lvlAct = L^.datos.lvl) Do
+        Begin
+          write(L^.datos.num, '  ');
+          aux := L;
+          L := L^.sig;
+          dispose(aux);
+        End;
+    End;
+End;

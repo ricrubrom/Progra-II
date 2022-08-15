@@ -2,8 +2,8 @@ Procedure preorden (a:arbol);
 Begin
   If a<>Nil Then
     Begin
-      write (' ', a^.valor);
-      enorden (a^.izq);
-      enorden (a^.der)
+      write (' ', a^.datos);
+      enorden (a^.HI);
+      enorden (a^.HD)
     End;
 End;

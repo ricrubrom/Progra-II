@@ -3,10 +3,10 @@ Begin
   If a = Nil Then
     Begin
       new (a);
-      a^.valor := n;
-      a^.izq := Nil;
-      a^.der := Nil;
+      a^.datos := n;
+      a^.HI := Nil;
+      a^.HD := Nil;
     End
-  Else If a^.valor>n Then insertar (a^.izq,n)
-  Else If a^.valor<n Then insertar (a^.der,n)
+  Else If a^.datos>n Then insertar (a^.HI,n)
+  Else If a^.datos<n Then insertar (a^.HD,n)
 End;

@@ -6,16 +6,16 @@ ANTES DE LLAMAR AL PROCEDURE POS:=a{arbol}
 Procedure busqueda (n:Integer;Var pos:arbol);
 Begin
   If pos=Nil Then
-    WriteLn ('El valor indicado no se encuentra en el arbol')
+    WriteLn ('El dato indicado no se encuentra en el arbol')
   Else
-    If pos^.valor>n Then
+    If pos^.datos>n Then
       Begin
-        pos := pos^.izq;
+        pos := pos^.HI;
         busqueda (n, pos)
       End
-  Else If pos^.valor<n Then
+  Else If pos^.datos<n Then
          Begin
-           pos := pos^.der;
+           pos := pos^.HD;
            busqueda (n,pos)
          End;
 End;

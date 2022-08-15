@@ -3,10 +3,10 @@ Begin
   If a=Nil Then
     busqueda := False
   Else
-    If a^.valor>n Then
-      busqueda := busqueda (a^.izq, n)
-  Else If a^.valor<n Then
-         busqueda := busqueda (a^.der, n)
+    If a^.datos>n Then
+      busqueda := busqueda (a^.HI, n)
+  Else If a^.datos<n Then
+         busqueda := busqueda (a^.HD, n)
   Else
     busqueda := true
 End;

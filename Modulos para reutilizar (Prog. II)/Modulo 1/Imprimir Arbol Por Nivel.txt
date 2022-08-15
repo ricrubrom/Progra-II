@@ -24,9 +24,9 @@ Procedure PreOrden(a:arbol; Var L:lista2; lvl: integer);
 Begin
   If (a <> Nil)Then
     Begin
-      InsertarOrd(L, a^.valor, lvl);
-      PreOrden(a^.der, L, lvl + 1);
-      PreOrden(a^.izq, L, lvl + 1);
+      InsertarOrd(L, a^.datos, lvl);
+      PreOrden(a^.HD, L, lvl + 1);
+      PreOrden(a^.HI, L, lvl + 1);
     End;
 End;
 

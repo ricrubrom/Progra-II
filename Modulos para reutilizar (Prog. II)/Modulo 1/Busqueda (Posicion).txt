@@ -1,0 +1,21 @@
+~~~~~~~~~~~~~~~~IMPORTANTE~~~~~~~~~~~~~~~~~~
+ANTES DE LLAMAR AL PROCEDURE POS:=a{arbol}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Procedure busqueda (n:Integer;Var pos:arbol);
+Begin
+  If pos=Nil Then
+    WriteLn ('El valor indicado no se encuentra en el arbol')
+  Else
+    If pos^.valor>n Then
+      Begin
+        pos := pos^.izq;
+        busqueda (n, pos)
+      End
+  Else If pos^.valor<n Then
+         Begin
+           pos := pos^.der;
+           busqueda (n,pos)
+         End;
+End;

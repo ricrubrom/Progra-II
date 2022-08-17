@@ -1,0 +1,23 @@
+
+//Post Orden de izquierda a derecha
+Procedure PostOrden(a:arbol);
+Begin
+  If (a<>Nil) Then
+    Begin
+      PostOrden(a^.HI);
+      PostOrden(a^.HD);
+      write (' ', a^.datos);
+    End;
+End;
+
+
+//Post Orden de derecha a izquierda
+Procedure PostOrden(a:arbol);
+Begin
+  If (a<>Nil) Then
+    Begin
+      PostOrden(a^.HI);
+      PostOrden(a^.HD);
+      write (' ', a^.datos);
+    End;
+End;

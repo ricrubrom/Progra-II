@@ -1,7 +1,22 @@
-Procedure ImprimirPorNivel(a: arbol);
-Procedure InsertarOrd(Var L:lista2; num, lvl: integer);
+//tipos
 
-Var nue, act, ant: lista2;
+InfoNivel = record
+    num: integer;
+    lvl: integer;
+  end;
+  // Lista de Arboles
+  listaNivel = ^nodoN;
+  nodoN = Record
+    datos: InfoNivel;
+    sig: listaNivel;
+  End;
+
+
+
+Procedure ImprimirPorNivel(a: arbol);
+Procedure InsertarOrd(Var L:listaNivel; num, lvl: integer);
+
+Var nue, act, ant: listaNivel;
 Begin
   new(nue);
   nue^.datos.num := num;
@@ -18,7 +33,7 @@ Begin
   nue^.sig := act;
 End;
 
-Procedure PreOrden(a:arbol; Var L:lista2; lvl: integer);
+Procedure PreOrden(a:arbol; Var L:listaNivel; lvl: integer);
 Begin
   If (a <> Nil)Then
     Begin
@@ -29,7 +44,7 @@ Begin
 End;
 
 Var 
-  L, aux: lista2;
+  L, aux: listaNivel;
   lvlAct: integer;
 Begin
   L := Nil;

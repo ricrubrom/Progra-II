@@ -17,10 +17,14 @@ Type
     HD: arbol;
   End;
 
+  InfoNivel = record
+    num: integer;
+    lvl: integer;
+  end;
   // Lista de Arboles
   listaNivel = ^nodoN;
   nodoN = Record
-    info: arbol;
+    datos: InfoNivel;
     sig: listaNivel;
   End;
 
@@ -86,54 +90,59 @@ End;
 
 
 {-----------------------------------------------------------------------------
-AGREGARATRAS - Agrega un elemento atr�s en l}
-
-Procedure AgregarAtras (Var l, ult: listaNivel; a:arbol);
-
-Var nue: listaNivel;
-
-Begin
-  new (nue);
-  nue^.info := a;
-  nue^.sig := Nil;
-  If l= Nil Then l := nue
-  Else ult^.sig := nue;
-  ult := nue;
-End;
-
-
-{-----------------------------------------------------------------------------
 IMPRIMIRPORNIVEL - Muestra los datos del �rbol a por niveles }
 
-Procedure imprimirpornivel(a: arbol);
+Procedure ImprimirPorNivel(a: arbol);
+Procedure InsertarOrd(Var L:listaNivel; num, lvl: integer);
 
-Var 
-  l, aux, ult: listaNivel;
-  nivel, cant, i: integer;
+Var nue, act, ant: listaNivel;
 Begin
-  l := Nil;
+  new(nue);
+  nue^.datos.num := num;
+  nue^.datos.lvl := lvl;
+  act := L;
+  ant := L;
+  While (act <> Nil)And(nue^.datos.lvl > act^.datos.lvl) Do
+    Begin
+      ant := act;
+      act := act^.sig;
+    End;
+  If (ant = act)Then L := nue
+  Else ant^.sig := nue;
+  nue^.sig := act;
+End;
+
+Procedure PreOrden(a:arbol; Var L:listaNivel; lvl: integer);
+Begin
   If (a <> Nil)Then
     Begin
-      nivel := 0;
-      agregarAtras (l,ult,a);
-      While (l<> Nil) Do
+      InsertarOrd(L, a^.datos, lvl);
+      PreOrden(a^.HD, L, lvl + 1);
+      PreOrden(a^.HI, L, lvl + 1);
+    End;
+End;
+
+Var 
+  L, aux: listaNivel;
+  lvlAct: integer;
+Begin
+  L := Nil;
+  PreOrden(a, L, 1);
+  While (L <> Nil) Do
+    Begin
+      writeln();
+      lvlAct := L^.datos.lvl;
+      write('Nivel ', L^.datos.lvl,': ');
+      While (L<>Nil) And (lvlAct = L^.datos.lvl) Do
         Begin
-          nivel := nivel + 1;
-          cant := contarElementos(l);
-          write ('Nivel ', nivel, ': ');
-          For i:= 1 To cant Do
-            Begin
-              write (l^.info^.datos, ' - ');
-              If (l^.info^.HI <> Nil) Then agregarAtras (l,ult,l^.info^.HI);
-              If (l^.info^.HD <> Nil) Then agregarAtras (l,ult,l^.info^.HD);
-              aux := l;
-              l := l^.sig;
-              dispose (aux);
-            End;
-          writeln;
+          write(L^.datos.num, '  ');
+          aux := L;
+          L := L^.sig;
+          dispose(aux);
         End;
     End;
 End;
+
 
 Procedure cargaarbol (Var a:arbol; l:lista);
 Procedure insertar (Var a:arbol; n:integer);

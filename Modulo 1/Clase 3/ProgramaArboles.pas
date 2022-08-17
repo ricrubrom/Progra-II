@@ -171,6 +171,25 @@ Begin
          End;
 End;
 
+Function VerMin(a:arbol; min: integer): integer;
+Begin
+  If (a <> Nil)Then
+    Begin
+      min := a^.datos;
+      VerMin := VerMin(a^.HI, min)
+    End
+  Else VerMin := min;
+End;
+
+Function VerMax(a:arbol; max: integer): integer;
+Begin
+  If (a <> Nil)Then
+    Begin
+      max := a^.datos;
+      VerMax := VerMax(a^.HD, max)
+    End
+  Else VerMax := max;
+End;
 
 
 Var 
@@ -200,5 +219,7 @@ Begin
   readln(num);
   busqueda(num, pos);
   If (pos <> Nil)Then
-    writeln(pos^.datos)
+    writeln(pos^.datos);
+  writeln('Valor Minimo: ', VerMin(a, -1));
+  writeln('Valor Maximo: ', VerMax(a, -1));
 End.

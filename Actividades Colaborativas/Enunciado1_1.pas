@@ -63,5 +63,19 @@ Begin
   Randomize;
   a := Nil;
   CargarArbol(a);
-
+  writeln('Ingrese un numero del 1 al 6: ');
+  writeln('1 = Inicializar');
+  writeln('2 = Insertar Destino');
+  writeln('3 = Imprimir Arbol');
+  writeln('4 = Buscar Destino e Imprimir');
+  writeln('5 = Informar Destino mas cercano');
+  writeln('6 = Sumar cantidad de pasajes a un destino');
+  case of n 
+  1: 
+  2: 
+  3: 
+  4: 
+  5: 
+  6: 
+  else writeln('Finalizado');
 End.

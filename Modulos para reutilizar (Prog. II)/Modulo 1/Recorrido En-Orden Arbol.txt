@@ -1,9 +1,23 @@
-Procedure enorden (a:arbol);
+
+//En Orden de menor a mayor
+Procedure EnOrden (a:arbol);
 Begin
   If a<>Nil Then
     Begin
-      enorden (a^.HI);
+      EnOrden (a^.HI);
       write (' ', a^.datos);
-      enorden (a^.HD)
+      EnOrden (a^.HD)
+    End;
+End;
+
+
+//En Orden de mayor a menor
+Procedure EnOrden (a:arbol);
+Begin
+  If a<>Nil Then
+    Begin
+      EnOrden (a^.HI);
+      write (' ', a^.datos);
+      EnOrden (a^.HD)
     End;
 End;

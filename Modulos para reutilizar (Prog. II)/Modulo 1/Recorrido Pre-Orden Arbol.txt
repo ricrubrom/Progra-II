@@ -1,9 +1,24 @@
-Procedure preorden (a:arbol);
+
+
+//Pre Orden de izquierda a derecha
+Procedure PreOrden (a:arbol);
 Begin
   If a<>Nil Then
     Begin
       write (' ', a^.datos);
-      enorden (a^.HI);
-      enorden (a^.HD)
+      PreOrden (a^.HI);
+      PreOrden (a^.HD)
+    End;
+End;
+
+
+//Pre Orden de derecha a izquierda
+Procedure PreOrden (a:arbol);
+Begin
+  If a<>Nil Then
+    Begin
+      write (' ', a^.datos);
+      PreOrden (a^.HI);
+      PreOrden (a^.HD)
     End;
 End;

@@ -1,12 +1,12 @@
-Function busqueda (a:arbol; n:Integer): Boolean;
+Function Busqueda(a:arbol; n:Integer): Boolean;
 Begin
-  If a=Nil Then
+  If (a=Nil) Then
     busqueda := False
   Else
-    If a^.datos>n Then
+    If (a^.datos>n) Then
       busqueda := busqueda (a^.HI, n)
-  Else If a^.datos<n Then
-         busqueda := busqueda (a^.HD, n)
+  Else If (a^.datos<n) Then
+         Busqueda := Busqueda (a^.HD, n)
   Else
-    busqueda := true
+    Busqueda := true
 End;

@@ -1,12 +1,12 @@
-Procedure insertar (Var a:arbol; n:integer);
+Procedure Insertar (Var a:arbol; n:integer);
 Begin
-  If a = Nil Then
+  If (a = Nil) Then
     Begin
       new (a);
       a^.datos := n;
       a^.HI := Nil;
       a^.HD := Nil;
     End
-  Else If a^.datos>n Then insertar (a^.HI,n)
-  Else If a^.datos<n Then insertar (a^.HD,n)
+  Else If (a^.datos>n) Then insertar (a^.HI,n)
+  Else If (a^.datos<n) Then insertar (a^.HD,n)
 End;

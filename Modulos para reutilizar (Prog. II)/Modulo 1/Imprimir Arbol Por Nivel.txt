@@ -1,6 +1,4 @@
 Procedure ImprimirPorNivel(a: arbol);
-
-
 Procedure InsertarOrd(Var L:lista2; num, lvl: integer);
 
 Var nue, act, ant: lista2;

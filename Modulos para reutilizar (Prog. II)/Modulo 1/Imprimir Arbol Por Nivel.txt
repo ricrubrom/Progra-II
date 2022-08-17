@@ -30,8 +30,6 @@ Begin
     End;
 End;
 
-
-
 Var 
   L, aux: lista2;
   lvlAct: integer;

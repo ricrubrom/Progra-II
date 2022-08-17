@@ -18,16 +18,16 @@ Type
     HD: arbol;
   End;
 
-  datosLista2 = record
+  datosLista2 = Record
     num: integer;
     lvl: integer;
-  end;
+  End;
 
   lista2 = ^nodo2;
-  nodo2 = record
+  nodo2 = Record
     datos: datosLista2;
     sig: lista2;
-  end;
+  End;
 
 
 Procedure InsertarOrd(Var L:lista; num: integer);

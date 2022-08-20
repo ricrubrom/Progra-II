@@ -168,51 +168,67 @@ Begin
     End;
 End;
 
-Procedure EnOrden (a:arbol);
-Begin
-  If a<>Nil Then
-    Begin
-      EnOrden (a^.HI);
-      write (' ', a^.datos);
-      EnOrden (a^.HD)
-    End;
-End;
 
-Procedure VerValoresEnRango(a: arbol; sup, inf: integer);
+Procedure BorrarElemento(Var a:arbol; num: integer; Var encontre: boolean);
+Function VerMin(a:arbol; min: integer): integer;
 Begin
   If (a <> Nil)Then
     Begin
-      If (a^.datos >= inf)And(a^.datos <= sup)Then
-        Begin
-          write(a^.datos, ' | ');
-          VerValoresEnRango(a^.HI, sup, inf);
-          VerValoresEnRango(a^.HD, sup, inf);
-        End;
-      If (a^.datos < inf)Then
-        VerValoresEnRango(a^.HD, sup, inf);
-      If (a^.datos > sup)Then
-        VerValoresEnRango(a^.HI, sup, inf);
-    End;
+      min := a^.datos;
+      VerMin := VerMin(a^.HI, min)
+    End
+  Else VerMin := min;
 End;
 
-Var 
-  l: lista;
-  a: arbol;
-  inf, sup: integer;
 Begin
-  Randomize;
-  crearLista(l);
-  writeln ('Lista generada: ');
-  imprimirLista(l);
-  cargaarbol(a, l);
-  writeln();
-  //imprimirpornivel(a);
-  EnOrden(a);
-  writeln();
-  writeln('Ingrese valor inferior del rango: ');
-  readln(inf);
-  writeln('Ingrese valor superior del rango: ');
-  readln(sup);
-  write('Valores dentro del rango: ');
-  VerValoresEnRango(a, sup, inf);
-End.
+  If (a = Nil)Then
+    encontre := false
+  Else
+    If (a^.datos > num)Then
+      BorrarElemento(a^.HI, num, encontre)
+  Else
+    If (a^.datos < num)Then
+      BorrarElemento(a^.HD, num, encontre)
+  Else
+    Begin
+      encontre := true;
+      If (a^.HI = Nil)And(a^.HD <> Nil)Then  //si solo tiene hijo derecho
+        Begin
+          a^.datos := 
+          a^.HD := Nil;
+        End
+      Else
+        Begin
+          If (a^.HD = Nil)And(a^.HI <> Nil)Then //si solo tiene hijo izquierdo
+            Begin
+              a^.datos := 
+              a^.HD := Nil;
+            End
+          Else 
+            if(a^.HI <> Nil)and(a^.HD <> Nil)then
+            Begin 
+              minDer := VerMin(a.HD, 9999);
+              a^.datos := minDer;
+              BorrarElemento(a^.HD, minDer, resultado);
+            End
+            else dispose(a);
+        End;
+    End;
+
+  Var 
+    l: lista;
+    a: arbol;
+    num: integer;
+    encontre: boolean;
+  Begin
+    Randomize;
+    crearLista(l);
+    writeln ('Lista generada: ');
+    imprimirLista(l);
+    cargaarbol(a, l);
+    writeln();
+    imprimirpornivel(a);
+    writeln('Inserte valor a borrar: ');
+    readln(num);
+    BorrarElemento(a, num, encontre);
+  End.

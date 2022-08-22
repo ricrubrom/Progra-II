@@ -190,7 +190,7 @@ Begin
       BorrarElemento(a^.HD, num)
   Else
     Begin
-      If (aux^.HI = Nil)Then //si solo tiene hijo derecho
+      If (a^.HI = Nil)Then //si solo tiene hijo derecho
         Begin
           aux := a;
           a := a^.HD;
@@ -198,17 +198,17 @@ Begin
         End
       Else
         Begin
-          If (aux^.HD = Nil)Then //si solo tiene hijo izquierdo
+          If (a^.HD = Nil)Then //si solo tiene hijo izquierdo
             Begin
               aux := a;
               a := a^.HI;
               dispose(aux)
             End
           Else
-            If (aux^.HI <> Nil)And(aux^.HD <> Nil)Then
+            If (a^.HI <> Nil)And(a^.HD <> Nil)Then
               Begin
-                aux^.datos := VerMin(aux^.HD, 9999);
-                BorrarElemento(aux^.HD, aux^.datos);
+                a^.datos := VerMin(a^.HD, 9999);
+                BorrarElemento(a^.HD, a^.datos);
               End;
         End;
     End;
@@ -231,7 +231,7 @@ Begin
   readln(num);
   While a<>Nil Do
     Begin
-      BorrarElemento(a, num, a);
+      BorrarElemento(a, num);
       writeln();
       imprimirpornivel(a);
       writeln();

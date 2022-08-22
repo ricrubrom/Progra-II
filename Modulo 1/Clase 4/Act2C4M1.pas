@@ -166,7 +166,7 @@ Begin
 End;
 
 
-Procedure BorrarElemento(Var a:arbol; num: integer; Var ant:arbol);
+Procedure BorrarElemento(Var a:arbol; num: integer);
 Function VerMin(a:arbol; min: integer): integer;
 Begin
   If (a <> Nil)Then
@@ -180,15 +180,14 @@ End;
 Var aux: arbol;
 
 Begin
-  aux := a;
-  If (aux = Nil)Then
+  If (a = Nil)Then
     writeln('No se encontro el dato a eliminar')
   Else
-    If (aux^.datos > num)Then
-      BorrarElemento(aux^.HI, num, aux)
+    If (a^.datos > num)Then
+      BorrarElemento(a^.HI, num)
   Else
-    If (aux^.datos < num)Then
-      BorrarElemento(aux^.HD, num, aux)
+    If (a^.datos < num)Then
+      BorrarElemento(a^.HD, num)
   Else
     Begin
       If (aux^.HI = Nil)Then //si solo tiene hijo derecho
@@ -209,7 +208,7 @@ Begin
             If (aux^.HI <> Nil)And(aux^.HD <> Nil)Then
               Begin
                 aux^.datos := VerMin(aux^.HD, 9999);
-                BorrarElemento(aux^.HD, aux^.datos, aux);
+                BorrarElemento(aux^.HD, aux^.datos);
               End;
         End;
     End;

@@ -12,8 +12,6 @@ Begin
   Else If a^.datos<n Then insertar (a^.HD,n)
 End;
 
-Var n: Integer;
-
 Begin
   While (l<>Nil) Do
     Begin

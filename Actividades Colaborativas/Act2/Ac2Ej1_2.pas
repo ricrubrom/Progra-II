@@ -1,5 +1,5 @@
 
-Program Actividad2;
+Program Ac2Ej1_2;
 
 Const 
   fin = 0;
@@ -8,14 +8,7 @@ Const
 
 Type 
 
-
   cadena30 = string[30];
-
-  listaArbol = ^nodo;
-  nodo = Record
-    datos: integer;
-    sig: listaArbol;
-  End;
 
   //datos Arbol Ej 1
   InfoArbol = Record
@@ -24,11 +17,19 @@ Type
     Cant: integer;
   End;
 
+  //arbol 1
   arbol = ^nodoA;
   nodoA = Record
     datos: InfoArbol;
     HI: arbol;
     HD: arbol;
+  End;
+
+  //Repetidos Arbol2
+  listaArbol = ^nodo;
+  nodo = Record
+    datos: integer;
+    sig: listaArbol;
   End;
 
   //datos arbolEj2
@@ -38,12 +39,17 @@ Type
     l: listaArbol;
   End;
 
-  NodoArbol2 = Record
-    Code: integer;
-    Nom : cadena30;
-    DNI: integer;
+  //Arbol 2
+  arbol2 = ^NodoA2;
+
+  //Nodo Arbol2
+  NodoA2 = Record
+    datos: InfoArbol2;
+    HI: arbol2;
+    HD: arbol2;
   End;
 
+  //Nodo para la carga
   NodoExtra = Record
     Code: integer;
     Nom : cadena30;
@@ -52,20 +58,9 @@ Type
   End;
 
 
-  arbol2 = ^NodoA2;
-
-  //Nodo Arbol
-  NodoA2 = Record
-    datos: InfoArbol2;
-    HI: arbol;
-    HD: arbol;
-  End;
-
-
-
 
   //Ej1
-Procedure insertarArbol(Var a:arbol; code:integer; nom:cadena30; cant: integer);
+Procedure insertarArbol1(Var a:arbol; code:integer; nom:cadena30; cant: integer);
 Begin
   If a = Nil Then
     Begin
@@ -76,8 +71,8 @@ Begin
       a^.HI := Nil;
       a^.HD := Nil;
     End
-  Else If a^.datos.code>code Then insertarArbol (a^.HI, code, nom, cant)
-  Else If a^.datos.code<code Then insertarArbol (a^.HD, code, nom, cant)
+  Else If a^.datos.code>code Then insertarArbol1 (a^.HI, code, nom, cant)
+  Else If a^.datos.code<code Then insertarArbol1(a^.HD, code, nom, cant)
   Else a^.datos.cant := a^.datos.cant + 1;
 End;
 
@@ -111,8 +106,8 @@ Begin
       a2^.HI := Nil;
       a2^.HD := Nil;
     End
-  Else If (a2^.datos.code>code) Then InsertarArbol2(a2^.HI, code, nom, DNI)
-  Else If (a2^.datos.code<code) Then InsertarArbol2(a2^.HD, code, nom, DNI)
+  Else If (a2^.datos.Code>code) Then InsertarArbol2(a2^.HI, code, nom, DNI)
+  Else If (a2^.datos.Code<code) Then InsertarArbol2(a2^.HD, code, nom, DNI)
   Else InsertarDNI(a2^.datos.l, DNI);
 End;
 
@@ -149,7 +144,7 @@ End;
 Procedure VerValoresEnRango2(a: arbol2; sup, inf: integer);
 
 Procedure ImprimirReg (n:InfoArbol2);
-Procedure imprimirLista (l:listaArbol)
+Procedure imprimirLista (l:listaArbol);
 Begin
   While l<>Nil Do
     Begin
@@ -167,15 +162,15 @@ End;
 Begin
   If (a <> Nil)Then
     Begin
-      If (a^.datos >= inf)And(a^.datos <= sup)Then
+      If (a^.datos.Code >= inf)And(a^.datos.code <= sup)Then
         Begin
           ImprimirReg(a^.datos);
           VerValoresEnRango2(a^.HI, sup, inf);
           VerValoresEnRango2(a^.HD, sup, inf);
         End;
-      If (a^.datos < inf)Then
+      If (a^.datos.code < inf)Then
         VerValoresEnRango2(a^.HD, sup, inf);
-      If (a^.datos > sup)Then
+      If (a^.datos.code > sup)Then
         VerValoresEnRango2(a^.HI, sup, inf);
     End;
 End;

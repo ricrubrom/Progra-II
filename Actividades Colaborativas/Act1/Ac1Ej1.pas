@@ -1,5 +1,5 @@
 
-Program Enunciado1_1;
+Program Ac1Ej1;
 
 Type 
   cadena30 = String[30];

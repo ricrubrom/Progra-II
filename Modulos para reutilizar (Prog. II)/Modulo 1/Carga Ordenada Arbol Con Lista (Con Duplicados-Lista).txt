@@ -1,0 +1,64 @@
+  
+  //tipos
+  
+//lista Duplicados
+  listaArbol = ^nodo;
+  nodo = Record
+    datos: integer;
+    sig: listaArbol;
+  End;
+
+//datos arbol
+  InfoArbol = Record
+    peso: integer;
+    l: listaArbol;
+  End;
+
+  arbol = ^NodoA;
+
+  //Nodo Arbol
+  NodoA = Record
+    datos: InfoArbol;
+    HI: arbol;
+    HD: arbol;
+  End;
+
+
+
+
+
+Procedure cargaarbol (Var a:arbol; l:lista);
+
+Procedure InsertarCodigo(Var L: listaArbol; code: Integer);
+
+Var nue: listaArbol;
+Begin
+  new(nue);
+  nue^.datos := code;
+  nue^.sig := L;
+  L := nue;
+End;
+Procedure insertar (Var a:arbol; n:encomienda);
+Begin
+  If a = Nil Then
+    Begin
+      new (a);
+      a^.datos.peso := n.peso;
+      new (a^.datos.l);
+      a^.datos.l^.datos := n.codigo;
+      a^.datos.l^.sig := Nil;
+      a^.HI := Nil;
+      a^.HD := Nil;
+    End
+  Else If a^.datos.peso>n.peso Then insertar (a^.HI,n)
+  Else If a^.datos.peso<n.peso Then insertar (a^.HD,n)
+  Else InsertarCodigo(a^.datos.l,n.codigo)
+End;
+
+Begin
+  While (l<>Nil) Do
+    Begin
+      insertar (a,l^.datos);
+      l := l^.sig;
+    End;
+End;

@@ -54,3 +54,11 @@ Begin
   Else If a^.datos.peso<n.peso Then insertar (a^.HD,n)
   Else InsertarCodigo(a^.datos.l,n.codigo)
 End;
+
+Begin
+  While (l<>Nil) Do
+    Begin
+      insertar (a,l^.datos);
+      l := l^.sig;
+    End;
+End;

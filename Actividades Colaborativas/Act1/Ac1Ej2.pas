@@ -1,5 +1,5 @@
 
-Program Enunciado2_1;
+Program Ac1Ej2;
 
 Const 
   fin = 0;

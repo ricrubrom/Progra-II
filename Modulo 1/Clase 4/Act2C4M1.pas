@@ -53,7 +53,7 @@ Var
 Begin
   l := Nil;
   n := random (20);
-  While (n <> 0) Do
+  While n<>0 Do
     Begin
       agregarAdelante(L, n);
       n := random (20);
@@ -157,6 +157,9 @@ Begin
   Else If a^.datos>n Then insertar (a^.HI,n)
   Else If a^.datos<n Then insertar (a^.HD,n)
 End;
+
+Var n: Integer;
+
 Begin
   While (l<>Nil) Do
     Begin
@@ -218,6 +221,7 @@ Var
   l: lista;
   a: arbol;
   num: integer;
+  encontre: boolean;
 Begin
   Randomize;
   crearLista(l);
@@ -226,16 +230,7 @@ Begin
   cargaarbol(a, l);
   writeln();
   imprimirpornivel(a);
-  writeln();
   writeln('Inserte valor a borrar: ');
   readln(num);
-  While a<>Nil Do
-    Begin
-      BorrarElemento(a, num);
-      writeln();
-      imprimirpornivel(a);
-      writeln();
-      writeln('Inserte valor a borrar: ');
-      readln(num);
-    End;
+  BorrarElemento(a, num, encontre);
 End.

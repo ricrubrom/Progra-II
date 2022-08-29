@@ -16,8 +16,8 @@ Procedure EnOrden (a:arbol);
 Begin
   If a<>Nil Then
     Begin
-      EnOrden (a^.HI);
+      EnOrden (a^.HD);
       write (' ', a^.datos);
-      EnOrden (a^.HD)
+      EnOrden (a^.HI)
     End;
 End;

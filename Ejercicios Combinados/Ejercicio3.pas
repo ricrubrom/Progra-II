@@ -139,7 +139,6 @@ Begin
 End;
 
 Procedure imprimirLista(l:listaPedidos);
-//como se hablaba? se me cerro el chat jssj
 Begin
   While (l<>Nil) Do
     Begin

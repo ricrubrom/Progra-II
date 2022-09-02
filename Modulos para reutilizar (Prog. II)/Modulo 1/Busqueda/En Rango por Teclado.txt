@@ -2,15 +2,15 @@ Procedure VerValoresEnRango(a: arbol; sup, inf: integer);
 Begin
   If (a <> Nil)Then
     Begin
-      If (a^.datos >= inf)And(a^.datos <= sup)Then
+      If (a^.datos.[Campo] >= inf)And(a^.datos.[Campo] <= sup)Then
         Begin
-          write(a^.datos, ' | ');
+          write(a^.datos.[Campo], ' | ');
           VerValoresEnRango(a^.HI, sup, inf);
           VerValoresEnRango(a^.HD, sup, inf);
         End;
-      If (a^.datos < inf)Then
+      If (a^.datos.[Campo] < inf)Then
         VerValoresEnRango(a^.HD, sup, inf);
-      If (a^.datos > sup)Then
+      If (a^.datos.[Campo] > sup)Then
         VerValoresEnRango(a^.HI, sup, inf);
     End;
 End;

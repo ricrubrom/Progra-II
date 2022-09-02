@@ -5,7 +5,7 @@ Begin
   If a<>Nil Then
     Begin
       EnOrden (a^.HI);
-      write (' ', a^.datos);
+      {Accion};
       EnOrden (a^.HD)
     End;
 End;
@@ -17,7 +17,7 @@ Begin
   If a<>Nil Then
     Begin
       EnOrden (a^.HD);
-      write (' ', a^.datos);
+      {Accion};
       EnOrden (a^.HI)
     End;
 End;

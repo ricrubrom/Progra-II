@@ -5,7 +5,7 @@ Procedure PreOrden (a:arbol);
 Begin
   If a<>Nil Then
     Begin
-      write (' ', a^.datos);
+      {Accion};
       PreOrden (a^.HI);
       PreOrden (a^.HD)
     End;
@@ -17,7 +17,7 @@ Procedure PreOrden (a:arbol);
 Begin
   If a<>Nil Then
     Begin
-      write (' ', a^.datos);
+      {Accion};
       PreOrden (a^.HI);
       PreOrden (a^.HD)
     End;

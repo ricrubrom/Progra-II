@@ -1,0 +1,12 @@
+//Datos de Lista
+InfoLista=record
+    {Datos a insertar}
+end;
+
+
+//lista Duplicados
+  listaArbol = ^nodo;
+  nodo = Record
+    datos: InfoLista;
+    sig: listaArbol;
+  End;

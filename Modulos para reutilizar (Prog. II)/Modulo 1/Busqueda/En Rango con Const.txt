@@ -1,0 +1,16 @@
+Procedure VerValoresEnRango(a: arbol);
+Begin
+  If (a <> Nil)Then
+    Begin
+      If (a^.datos.[Campo] >= inf)And(a^.datos.[Campo] <= sup)Then
+        Begin
+          write(a^.datos.[Campo], ' | ');
+          VerValoresEnRango(a^.HI);
+          VerValoresEnRango(a^.HD);
+        End;
+      If (a^.datos.[Campo] < inf)Then
+        VerValoresEnRango(a^.HD);
+      If (a^.datos.[Campo] > sup)Then
+        VerValoresEnRango(a^.HI);
+    End;
+End;

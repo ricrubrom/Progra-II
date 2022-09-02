@@ -1,0 +1,12 @@
+Procedure Insertar (Var a:arbol; X:[Campo]);
+Begin
+  If (a = Nil) Then
+    Begin
+      new (a);
+      a^.datos.[Campo] := X;
+      a^.HI := Nil;
+      a^.HD := Nil;
+    End
+  Else If (a^.datos.[Campo] > X) Then insertar (a^.HI, X)
+  Else If (a^.datos.[Campo] < X) Then insertar (a^.HD, X)
+End;

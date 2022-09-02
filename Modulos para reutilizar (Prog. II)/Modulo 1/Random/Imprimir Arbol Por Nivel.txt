@@ -1,7 +1,7 @@
 //tipos
 
 InfoNivel = record
-    num: integer;
+    [Campo]: [TipoCampo];
     lvl: integer;
   end;
   // Lista de Arboles
@@ -14,12 +14,12 @@ InfoNivel = record
 
 
 Procedure ImprimirPorNivel(a: arbol);
-Procedure InsertarOrd(Var L:listaNivel; num, lvl: integer);
+Procedure InsertarOrd(Var L:listaNivel; [Campo]:[TipoCampo]; lvl: integer);
 
 Var nue, act, ant: listaNivel;
 Begin
   new(nue);
-  nue^.datos.num := num;
+  nue^.datos.[Campo] := [Campo];
   nue^.datos.lvl := lvl;
   act := L;
   ant := L;
@@ -56,7 +56,7 @@ Begin
       write('Nivel ', L^.datos.lvl,': ');
       While (L<>Nil) And (lvlAct = L^.datos.lvl) Do
         Begin
-          write(L^.datos.num, '  ');
+          write(L^.datos.[Campo], '  ');
           aux := L;
           L := L^.sig;
           dispose(aux);

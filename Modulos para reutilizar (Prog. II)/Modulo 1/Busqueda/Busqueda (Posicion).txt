@@ -1,0 +1,21 @@
+
+Function Busqueda (a: arbol; X: [Campo]): arbol;
+Begin
+  If (a=Nil) Then
+    Begin
+      WriteLn ('El dato indicado no se encuentra en el arbol');
+      busqueda := Nil
+    End
+  Else
+    If (a^.datos.[Campo] > X) Then
+      Begin
+        a := a^.HI;
+        Busqueda := Busqueda(X, a)
+      End
+  Else If (a^.datos.[Campo] < X) Then
+         Begin
+           a := a^.HD;
+           Busqueda := Busqueda(X, a)
+         End
+  Else busqueda := a;
+End;

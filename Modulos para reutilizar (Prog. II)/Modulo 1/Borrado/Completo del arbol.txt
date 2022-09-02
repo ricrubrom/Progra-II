@@ -1,0 +1,9 @@
+Procedure Borrado(var a:arbol);
+Begin
+  If (a<>Nil) Then
+    Begin
+      Borrado(a^.HI);
+      Borrado(a^.HD);
+      dispose(a);
+    End;
+End;

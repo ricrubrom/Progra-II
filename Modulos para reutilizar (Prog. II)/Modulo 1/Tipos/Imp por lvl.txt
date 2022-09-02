@@ -1,0 +1,12 @@
+
+InfoNivel = record
+    [Campo]: [TipoCampo];
+    lvl: integer;
+  end;
+
+  // Lista de Arboles
+  listaNivel = ^nodoN;
+  nodoN = Record
+    datos: InfoNivel;
+    sig: listaNivel;
+  End;

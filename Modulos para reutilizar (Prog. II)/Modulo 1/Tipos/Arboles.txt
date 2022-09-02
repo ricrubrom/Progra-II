@@ -1,0 +1,15 @@
+
+
+//Datos arbol
+  InfoArbol = Record
+    {Datos a meter};
+  End;
+
+  arbol = ^NodoA;
+
+//Nodo Arbol
+  NodoA = Record
+    datos: InfoArbol;
+    HI: arbol;
+    HD: arbol;
+  End;

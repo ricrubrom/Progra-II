@@ -1,0 +1,12 @@
+Function Busqueda(a:arbol; X:[Campo]): Boolean;
+Begin
+  If (a=Nil) Then
+    busqueda := False
+  Else
+    If (a^.datos.[Campo] > X) Then
+      busqueda := busqueda (a^.HI, X)
+  Else If (a^.datos.[Campo] < X) Then
+         Busqueda := Busqueda (a^.HD, X)
+  Else
+    Busqueda := true
+End;

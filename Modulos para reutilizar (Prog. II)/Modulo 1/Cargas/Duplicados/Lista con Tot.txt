@@ -1,0 +1,44 @@
+
+//datos arbol
+  InfoArbol = Record
+    {Datos a meter};
+    Tot: integer;
+  End;
+
+  arbol = ^NodoA;
+
+  //Nodo Arbol
+  NodoA = Record
+    datos: InfoArbol;
+    HI: arbol;
+    HD: arbol;
+  End;
+
+Procedure cargaarbol (Var a:arbol);
+
+
+Procedure insertar (Var a:arbol; X:NodoExtra);
+Begin
+  If (a = Nil) Then
+    Begin
+      new (a);
+      a^.datos.[Campo1] := X.[Campo1];
+
+      {Insertar el resto de campos}
+
+      a^.datos.tot := 1
+      a^.HI := Nil;
+      a^.HD := Nil;
+    End
+  Else If (a^.datos.[Campo] > X.[Campo]) Then insertar (a^.HI, X)
+  Else If (a^.datos.[Campo] < X.[Campo]) Then insertar (a^.HD, X)
+  Else a^.datos.tot := a^.datos.tot + 1;
+End;
+
+Begin
+  While (l<>Nil) Do
+    Begin
+      insertar (a, l^.datos);
+      l := l^.sig;
+    End;
+End;

@@ -1,9 +1,9 @@
-Procedure BorrarElemento(Var a:arbol; num: integer);
+Procedure BorrarElemento(Var a:arbol; X: [Campo]);
 Function VerMin(a:arbol; min: integer): integer;
 Begin
   If (a <> Nil)Then
     Begin
-      min := a^.datos;
+      min := a^.datos.[Campo];
       VerMin := VerMin(a^.HI, min)
     End
   Else VerMin := min;
@@ -15,11 +15,11 @@ Begin
   If (a = Nil)Then
     writeln('No se encontro el dato a eliminar')
   Else
-    If (a^.datos > num)Then
-      BorrarElemento(a^.HI, num)
+    If (a^.datos.[Campo] > X)Then
+      BorrarElemento(a^.HI, X)
   Else
-    If (a^.datos < num)Then
-      BorrarElemento(a^.HD, num)
+    If (a^.datos.[Campo] < X)Then
+      BorrarElemento(a^.HD, X)
   Else
     Begin
       If (a^.HI = Nil)Then //si solo tiene hijo derecho
@@ -39,8 +39,8 @@ Begin
           Else
             If (a^.HI <> Nil)And(a^.HD <> Nil)Then
               Begin
-                a^.datos := VerMin(a^.HD, 9999);
-                BorrarElemento(a^.HD, a^.datos);
+                a^.datos.[Campo] := VerMin(a^.HD, 9999);
+                BorrarElemento(a^.HD, a^.datos.[Campo]);
               End;
         End;
     End;

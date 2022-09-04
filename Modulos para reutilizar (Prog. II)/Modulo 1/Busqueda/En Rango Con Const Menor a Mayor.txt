@@ -1,0 +1,20 @@
+
+//Busqueda Acotada entre dos valores de menor a mayor
+Procedure BusquedaAcotada (a:arbol);
+begin
+    if (a <> nil) then
+        if (a^.datos >= inf) then
+        begin
+            BusquedaAcotada(a^.HI);
+            if (a^.datos <=sup) then
+            begin
+                Writeln(a^.datos);
+                BusquedaAcotada(a^.HI);
+                BusquedaAcotada(a^.HD);
+            end
+            else
+            BusquedaAcotada(a^.HI);
+        end
+        else
+            BusquedaAcotada(a^.HD);
+end;

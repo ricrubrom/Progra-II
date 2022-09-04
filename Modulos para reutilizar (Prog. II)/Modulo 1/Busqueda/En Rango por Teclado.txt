@@ -14,3 +14,25 @@ Begin
         VerValoresEnRango(a^.HI, sup, inf);
     End;
 End;
+
+
+//Mas eficiente 
+
+Procedure BusquedaAcotada (a:arbol; inf, sup:integer);
+begin
+    if (a <> nil) then
+        if (a^.datos >= inf) then
+        begin
+            if (a^.datos <=sup) then
+            begin
+                Writeln(a^.datos);
+                BusquedaAcotada(a^.HI, inf, sup);
+                BusquedaAcotada(a^.HD, inf, sup);
+            end
+            else
+            BusquedaAcotada(a^.HI, inf, sup);
+        end
+        else
+            BusquedaAcotada(a^.HD, inf, sup);
+end;
+

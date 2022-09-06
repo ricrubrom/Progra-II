@@ -165,7 +165,7 @@ Var
   cant, i, pos, loc_vis: integer;
   v: nombres;
 Begin
-  cant := random(2);
+  cant := random(10);
   v[1] := 'Lionel Perez';
   v[2] := 'Martin Fernandez';
   v[3] := 'Mariano Gomez';
@@ -193,7 +193,7 @@ Begin
           DNI := 34807474;
           nombre_apellido := 'Leandro Romanut';
           equipo := 'Colon';
-          goles := random(3)+1;
+          goles := random(7)+1;
         End;
       agregarJugador(l, j);
     End;
@@ -222,7 +222,7 @@ Var
   cant,i,pos,loc,vis: integer;
   v,v2: nombres;
 Begin
-  cant := random(20)+1;
+  cant := random(50)+1;
   v[1] := 'Antonio Vespucio Liberti';
   v[2] := 'Mario Alberto Kempes';
   v[3] := 'Alberto Armando';
@@ -387,6 +387,28 @@ Begin
 End;
 
 
+
+
+{Procedure BusquedaAcotada (a:arbol);
+
+Begin
+  If (a <> Nil)Then
+    Begin
+      If (a^.HI<>Nil) And (a^.HI^.datos.DNI>inf) Then
+        BusquedaAcotada (a^.HI)
+        else If (a^.datos.DNI >= inf)And(a^.datos.DNI <= sup)Then
+        Begin
+          imprimirDatos(a^.datos);
+          BusquedaAcotada(a^.HI);
+          BusquedaAcotada(a^.HD);
+        End;
+      If (a^.datos.DNI > sup)Then
+        BusquedaAcotada(a^.HI);
+      If (a^.datos.DNI < inf)Then
+        BusquedaAcotada(a^.HD);
+    End;
+End;}
+
 Procedure BusquedaAcotada (a:arbol);
 Procedure ImprimirDatos (X:InfoArbol);
 Begin
@@ -396,19 +418,13 @@ Begin
 
 End;
 Begin
-
-
-  If (a <> Nil)Then
+  If (a <> Nil) Then
     Begin
-      If (a^.datos.DNI >= inf)And(a^.datos.DNI <= sup)Then
-        Begin
-          imprimirDatos(a^.datos);
-          BusquedaAcotada(a^.HI);
-          BusquedaAcotada(a^.HD);
-        End;
-      If (a^.datos.DNI > sup)Then
+      If (a^.HI <> Nil) And (a^.HI^.datos.DNI > inf) Then
         BusquedaAcotada(a^.HI);
-      If (a^.datos.DNI < inf)Then
+      If (a^.datos.DNI >= inf) And (a^.datos.DNI <= sup) Then
+        ImprimirDatos(a^.datos);
+      If (a^.HD <> Nil) And (a^.HD^.datos.DNI < sup) Then
         BusquedaAcotada(a^.HD);
     End;
 End;
@@ -427,6 +443,20 @@ Begin
   Else VerMin(a^.HI, min);
 End;
 
+Procedure LiberarMemoria(Var L:listaArbol);
+
+Var 
+  aux: listaArbol;
+Begin
+  While (L <> Nil) Do
+    Begin
+      aux := L;
+      L := L^.sig;
+      dispose(aux);
+    End;
+End;
+
+
 Var aux: arbol;
   min: InfoArbol;
 Begin
@@ -443,6 +473,7 @@ Begin
       If (a^.HI = Nil)Then //si solo tiene hijo derecho
         Begin
           aux := a;
+          LiberarMemoria(a^.datos.L);
           a := a^.HD;
           dispose(aux)
         End
@@ -451,6 +482,7 @@ Begin
           If (a^.HD = Nil)Then //si solo tiene hijo izquierdo
             Begin
               aux := a;
+              LiberarMemoria(a^.datos.L);
               a := a^.HI;
               dispose(aux)
             End
@@ -535,7 +567,8 @@ Begin
   cargaarbol(a,l);
   WriteLn();
   VerMaximo(a,Maximo);
-  WriteLn('El equipo con el mayor goleador es: ',Maximo.EquipoMax);
+  WriteLn('El equipo con el mayor goleador es: ',Maximo.EquipoMax, ' Con ', maximo.Cant,' goles');
+  WriteLn();
   BusquedaAcotada(a);
   WriteLn();
   ImprimirPorNivel(a);
@@ -543,6 +576,7 @@ Begin
   BorrarElemento(a,Buscado);
   WriteLn();
   ImprimirPorNivel(a);
+  WriteLn();
   WriteLn();
   writeln('Fin del programa');
 End.

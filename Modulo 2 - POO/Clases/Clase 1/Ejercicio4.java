@@ -17,5 +17,6 @@ public class Ejercicio4 {
             }
             System.out.println(n + "! =" + factorial);
         }
+        System.out.println("Programa Finalizado.");
     }
 }

@@ -11,6 +11,7 @@ public class Ejercicio3 {
         }
         System.out.println(numero + "! =" + factorial);
         in.close();
+        System.out.println("Programa Finalizado.");
     }
 
 }

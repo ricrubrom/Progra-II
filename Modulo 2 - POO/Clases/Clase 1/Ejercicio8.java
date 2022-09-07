@@ -10,7 +10,6 @@ public class Ejercicio8 {
             for (j = 0; j < 4; j++) {
                 System.out.println("Inserte el puntaje de " + j + " : ");
                 m[i][j] = in.nextInt();
-
             }
         }
         for (j = 0; j < 4; j++) {

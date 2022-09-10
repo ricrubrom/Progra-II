@@ -26,19 +26,17 @@ public class Ejercicio4 {
         for (int i = 0; i < 3; i++) {
             if (v[i].getGanador().equals("river"))
                 riverWins++;
-
             if (v[i].getLocal().equals("boca")) {
                 golesBoquita += v[i].getGolesLocal();
-
-                if (v[i].hayEmpate()) {
-                    empates++;
-                }
+            }
+            if (v[i].hayEmpate()) {
+                empates++;
             }
         }
 
         System.out.println("La cantidad de partidos ganados por los putos de riBer es " + riverWins);
         System.out.println("La cantidad de goles realizados por el club MAS GRANDE de America son: " + golesBoquita);
-        System.out.println("El porcentaje de empates es: " + (empates * 100) / 3);
+        System.out.println("El porcentaje de empates es: " + (double) (empates * 100) / 3);
 
     }
 

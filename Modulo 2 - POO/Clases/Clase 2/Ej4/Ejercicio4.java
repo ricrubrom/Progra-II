@@ -1,4 +1,4 @@
-package Rome.Ej4;
+package Ej4;
 
 import java.util.Scanner;
 
@@ -34,6 +34,7 @@ public class Ejercicio4 {
         }
         System.out.println("La cantidad de partidos que gano river fueron: " + ganoRiver);
         System.out.println("La cantidad de goles de Boca siendo local fueron: " + golesBoca);
-        System.out.println("El porcentaje de los partidos que terminaron en empate es: " + ((double) (empate * 100) / 3));
+        System.out
+                .println("El porcentaje de los partidos que terminaron en empate es: " + ((double) (empate * 100) / 3));
     }
 }

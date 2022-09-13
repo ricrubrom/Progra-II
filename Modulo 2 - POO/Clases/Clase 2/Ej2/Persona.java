@@ -1,4 +1,4 @@
-package Rome.Ej2;
+package Ej2;
 
 public class Persona {
     private String nombre;
@@ -31,10 +31,8 @@ public class Persona {
         }
     }
 
-    public String min(int unDNI) {
-        String aux;
+    public String min(int unDNI, String aux) {
         if (DNI > unDNI) {
-            aux = "Mi nombre es " + nombre + ", mi DNI es " + DNI + " y tengo " + edad + " años.";
             return aux;
         } else {
             aux = "Mi nombre es " + nombre + ", mi DNI es " + DNI + " y tengo " + edad + " años.";

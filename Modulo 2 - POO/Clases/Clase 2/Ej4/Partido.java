@@ -1,22 +1,22 @@
-package Gonza.Ej4;
+package Ej4;
+
 public class Partido {
     private String local;
     private String visitante;
-    private int golesLocal; 
+    private int golesLocal;
     private int golesVisitante;
-    
-    public Partido(){
-    
+
+    public Partido() {
+
     }
 
-    public Partido(String unLocal, String unVisitante, int unGolLocal, int unGolVisitante){
+    public Partido(String unLocal, String unVisitante, int unGolLocal, int unGolVisitante) {
         local = unLocal;
         visitante = unVisitante;
         golesLocal = unGolLocal;
         golesVisitante = unGolVisitante;
     }
 
-    
     public String getLocal() {
         return local;
     }
@@ -48,27 +48,26 @@ public class Partido {
     public void setGolesVisitante(int unosGoles) {
         golesVisitante = unosGoles;
     }
-    
-    public boolean hayGanador(){
-         return (golesLocal!=golesVisitante); 
+
+    public boolean hayGanador() {
+        return (golesLocal != golesVisitante);
     }
-    
-    public boolean hayEmpate(){
-         return ((golesLocal==golesVisitante));
+
+    public boolean hayEmpate() {
+        return ((golesLocal == golesVisitante));
     }
-    
-    public String getGanador(){
-         String ganador=new String();
-         if (golesLocal>golesVisitante){
-             ganador = local;
-         }
-         else {
-             if (golesLocal<golesVisitante){
-                 ganador = visitante;
-             }
-         }
-         return ganador;
-                 
-    }	    
-    
+
+    public String getGanador() {
+        String ganador = new String();
+        if (golesLocal > golesVisitante) {
+            ganador = local;
+        } else {
+            if (golesLocal < golesVisitante) {
+                ganador = visitante;
+            }
+        }
+        return ganador;
+
+    }
+
 }

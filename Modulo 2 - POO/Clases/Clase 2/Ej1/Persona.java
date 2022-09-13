@@ -1,14 +1,16 @@
-package Ej2;
-
 public class Persona {
     private String nombre;
     private int DNI;
-    private int edad;
-
-    public Persona(String unNombre, int unDNI, int unaEdad) {
+    private int edad; 
+    
+    public Persona(String unNombre, int unDNI, int unaEdad){
         nombre = unNombre;
         DNI = unDNI;
-        edad = unaEdad;
+        edad = unaEdad; 
+    }
+    
+    public Persona(){
+     
     }
 
     public int getDNI() {
@@ -23,7 +25,6 @@ public class Persona {
         return nombre;
     }
 
-
     public void setDNI(int unDNI) {
         DNI = unDNI;
     }
@@ -35,11 +36,14 @@ public class Persona {
     public void setNombre(String unNombre) {
         nombre = unNombre;
     }
-
-    public String toString() {
-        String aux;
+    
+    public String toString(){
+        String aux; 
         aux = "Mi nombre es " + nombre + ", mi DNI es " + DNI + " y tengo " + edad + " años.";
         return aux;
     }
-
+    
+    
+    
+    
 }

@@ -6,15 +6,17 @@ public class Ejercicio1C3 {
         Scanner in = new Scanner(System.in);
 
         System.out.println("Ingrese el primer lado del triangulo: ");
-        double l1 = in.nextInt();
+        double l1 = in.nextDouble();
         System.out.println("Ingrese el segundo lado del triangulo: ");
-        double l2 = in.nextInt();
+        double l2 = in.nextDouble();
         System.out.println("Ingrese el tercer lado del triangulo: ");
-        double l3 = in.nextInt();
+        double l3 = in.nextDouble();
         System.out.println("Ingrese el color de relleno del triangulo: ");
         String relleno = in.next();
         System.out.println("Ingrese el color de la linea del triangulo: ");
         String linea = in.next();
+
+        in.close();
 
         Triangulo t = new Triangulo();
         t.crear(l1, l2, l3, relleno, linea);

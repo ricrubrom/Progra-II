@@ -1,7 +1,5 @@
 package Ej2;
 
-import Persona;
-
 public class Persona {
     private String nombre;
     private int DNI;
@@ -24,7 +22,6 @@ public class Persona {
     public String getNombre() {
         return nombre;
     }
-
 
     public void setDNI(int unDNI) {
         DNI = unDNI;

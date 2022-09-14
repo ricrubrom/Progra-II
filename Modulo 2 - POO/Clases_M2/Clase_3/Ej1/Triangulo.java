@@ -1,4 +1,5 @@
-package Pruebas.Ej1C3;
+package Ej1;
+
 public class Triangulo {
     private double lado1;
     private double lado2;
@@ -6,9 +7,7 @@ public class Triangulo {
     private String relleno;
     private String linea;
 
-
-
-    public void crear(double MiLado1, double MiLado2, double MiLado3, String MiRelleno, String MiLinea) {
+    public Triangulo(double MiLado1, double MiLado2, double MiLado3, String MiRelleno, String MiLinea) {
         lado1 = MiLado1;
         lado2 = MiLado2;
         lado3 = MiLado3;
@@ -16,8 +15,11 @@ public class Triangulo {
         linea = MiLinea;
     }
 
+    public Triangulo() {
 
-    public double getLado1(){
+    }
+
+    public double getLado1() {
         return lado1;
     }
 
@@ -29,7 +31,7 @@ public class Triangulo {
         return lado3;
     }
 
-    public String getRelleno(){
+    public String getRelleno() {
         return relleno;
     }
 
@@ -37,45 +39,34 @@ public class Triangulo {
         return linea;
     }
 
-    public void setLado1(double lado){
-        lado1  = lado;
+    public void setLado1(double lado) {
+        lado1 = lado;
     }
 
     public void setLado2(double lado) {
         lado2 = lado;
     }
-    
+
     public void setLado3(double lado) {
         lado3 = lado;
     }
 
-    public void setRelleno(String color){
-        relleno  = color;
+    public void setRelleno(String color) {
+        relleno = color;
     }
 
     public void setLine(String color) {
         linea = color;
     }
 
-    public double calcularPerimetro(){
+    public double calcularPerimetro() {
         return (lado1 + lado2 + lado3);
     }
 
-    public double calcularArea(){
-        double s = (calcularPerimetro()/2);
-        return(Math.sqrt(s*(s - lado1)*(s - lado1)*(s - lado3)));
+    public double calcularArea() {
+        double s = (calcularPerimetro() / 2);
+        return (Math.sqrt(s * (s - lado1) * (s - lado1) * (s - lado3)));
 
     }
-
-
-
-
-
-
-
-
-
-
-
 
 }

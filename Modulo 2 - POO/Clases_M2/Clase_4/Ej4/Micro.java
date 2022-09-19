@@ -1,4 +1,4 @@
-package Ej3;
+package Ej4;
 
 public class Micro {
     private String destino;
@@ -23,10 +23,6 @@ public class Micro {
 
     public String getPatente() {
         return patente;
-    }
-
-    public int getAsientosOc() {
-        return this.asientos.getOcupados();
     }
 
     public int getAsientosTot() {

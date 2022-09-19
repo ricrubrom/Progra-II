@@ -1,4 +1,3 @@
-package Ej1;
 
 public class Triangulo {
     private double lado1;

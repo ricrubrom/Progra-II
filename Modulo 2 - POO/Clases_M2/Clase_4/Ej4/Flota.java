@@ -1,11 +1,12 @@
 package Ej4;
 
 public class Flota {
-    private Micro[] micro = new Micro[3];
+    private Micro[] micro;
     private int act;
 
     // i
     public Flota() {
+        micro = new Micro[15];
 
     }
 
@@ -43,7 +44,7 @@ public class Flota {
 
     // ii
     public boolean getFlota() {
-        return (act == 3);
+        return (act == 15);
     }
 
     // iii

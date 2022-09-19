@@ -11,7 +11,7 @@ public class Ejercicio4 {
             System.out.println("Inserte la patente del micro: ");
             patente = in.next();
             in.nextLine();
-            while ((!patente.equals("ZZZ000")) && (flota.getAct() != 3)) {
+            while ((!patente.equals("ZZZ000")) && (flota.getAct() != 15)) {
 
                 System.out.println("Inserte el destino del micro: ");
                 destino = in.nextLine();

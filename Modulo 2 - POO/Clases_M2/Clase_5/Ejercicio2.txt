@@ -1,0 +1,13 @@
+2- A- Defina el concepto de herencia. 
+     B- Defina el concepto de clase abstracta y método abstracto. ¿Cuál es su utilidad?
+     C- Describa los pasos que se siguen cuando se busca un método en la jerarquía de clases.
+En particular, para la siguiente sentencia, indique qué métodos se ejecutan y cómo se localizan en la jerarquía de clases: 
+Entrenador e = new Entrenador(…);
+System.out.println(e.toString()):
+
+2-A- La herencia es un mecanismo que permite que una clase herede los atributos y métodos de otra clase.
+b- Una clase abstracta es una clase que no se puede instanciar, es decir, no se puede crear un objeto de esa clase.
+c- Cuando se busca un método en la jerarquía de clases, primero se busca en la clase en la que se está trabajando,
+si no se encuentra, se busca en la clase padre, y así sucesivamente hasta llegar a la clase Object. 
+En el caso de la sentencia, se ejecuta el método toString() de la clase Entrenador,
+ya que es el que se encuentra en la clase en la que se está trabajando.

@@ -7,13 +7,14 @@ tabla db 50h,10h,20h,15h
 res dw ?
 act dw 0001h
 org 2000h
-mov cl, 04h;Dimesion Fisica
+mov cx, offset res
+sub cx,offset tabla
 mov Al,tabla
 suma: mov bx,offset tabla
 add bx,act
 adc Al,[bx]
 inc act
-cmp act,cx
+cmp act,cl
 jnz suma
 mov res,AL
 hlt

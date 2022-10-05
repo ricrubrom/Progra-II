@@ -4,17 +4,17 @@ Ejercicio 8.- Escriba un programa en lenguaje Assembler que permita
 
 
 org 1000h
-num1 dw 0003h
-num2 dw 000Ah
-act dw 0001h
-resu dw ?
+num1 db 03h
+num2 db 09h
+act db 01h
+resu db ?
 org 2000h
-mov AX, num1
-mov cx, num2
-mult: add AX,num1
+mov Al, num1
+mov cl, num2
+mult: add Al,num1
 inc act
-cmp act,CX
+cmp act,Cl
 JNZ mult
-mov resu,AX
+mov resu,Al
 hlt
 end

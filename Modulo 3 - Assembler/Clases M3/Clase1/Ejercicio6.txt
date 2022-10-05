@@ -1,0 +1,30 @@
+a)	¿Para qué sirve la instrucción ORG?
+b)	¿Qué modos de direccionamiento se utilizan en (1) y en (2)?
+c)	¿Qué tipo de salto es el que aparece en (3) y cuándo se produce?
+d)	Explique brevemente qué hace el programa.
+
+
+a)Sirve para dirigirnos a una direccion de memoria especifica (almacenada en el IP). Nosotros la usamos para declarar 
+una region en memoria en la que se declaran las variables y otra en la que se declaran las instrucciones.
+
+b) 1) inmediato
+2) directo de memoria/absoluto
+
+c) el salto que aparece en 3) ocurre cuando la flag de cero se prende en la operacion CMP AX, 1500; 
+es decir, cuando AX=1500
+
+d) Compara dos numeros, y en el caso de que sean iguales mueve al registro BX el numero 500d y luego finaliza el programa, 
+en caso contrario finaliza el programa sin realizar ninguna otra operacion
+
+ORG 1000h
+Dato    DW 2000
+
+ORG 2000h
+MOV AX, 500 	           ; (1)
+ADD AX, Dato	           ; (2)
+CMP AX, 1500 
+JZ Then 	           ; (3)
+JMP Fin 
+Then: 		MOV BX, 500 
+Fin:		HLT 
+END

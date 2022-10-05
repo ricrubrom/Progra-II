@@ -1,0 +1,20 @@
+Ejercicio 7.- Realice un programa en Assembler que permita realizar la suma de todos los valores de una tabla.
+              Almacene el resultado en memoria principal.
+
+
+org 1000h
+tabla db 50h,10h,20h,15h
+res dw ?
+act dw 0001h
+org 2000h
+mov cl, 04h;Dimesion Fisica
+mov Al,tabla
+suma: mov bx,offset tabla
+add bx,act
+adc Al,[bx]
+inc act
+cmp act,cx
+jnz suma
+mov res,AL
+hlt
+end

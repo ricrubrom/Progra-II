@@ -1,0 +1,27 @@
+Ejercicio 9.- Escriba un programa que sume los valores de las posiciones de 2 tablas de igual tamaño 
+              y almacene los resultados en una tercera tabla en memoria.
+
+
+
+org 1000h
+tabla1 db 10h,30h,20h   ;1000h,1001h,1002h
+tabla2 db 30h,50h,60h   ;1003h,1004h,1005h
+tablaR db ?,?,?         ;1006h,1007h,1008h
+act db 00h
+
+org 2000h
+mov dl, 03h
+suma: mov bx,offset tabla1
+add bx,act
+mov AL, [bx]
+mov bx,offset tabla2
+add bx,act
+add AL, [bx]
+mov bx, offset tablaR
+add bx,act
+mov [bx],AL
+inc act
+cmp act, dl
+jnz suma
+hlt
+end

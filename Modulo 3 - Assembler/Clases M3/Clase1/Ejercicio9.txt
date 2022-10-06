@@ -25,3 +25,33 @@ cmp act, dl
 jnz suma
 hlt
 end
+
+
+//El que hizo gonza
+
+ORG 1000h
+tabla DB 1, 2, 3, 4, 5
+tabla2 DB 6, 7, 8, 9, 10
+tabla3 DB ?, ?, ?, ?, ?
+
+ORG 2000h
+MOV AX, offset tabla2
+SUB AX, offset tabla
+MOV DX, AX
+
+
+SUMA: DEC DX
+MOV BX, offset tabla
+ADD BX, DX
+MOV CL, [BX]
+MOV BX, offset tabla2
+ADD BX, DX
+ADD CL, [BX]
+MOV BX, offset tabla3
+ADD BX, DX
+MOV [BX], Cl
+DEC AX
+JNZ SUMA
+
+hlt
+end

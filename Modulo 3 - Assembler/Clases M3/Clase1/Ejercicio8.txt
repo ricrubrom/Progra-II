@@ -18,3 +18,24 @@ JNZ mult
 mov resu,Al
 hlt
 end
+
+
+//El que hizo Gonza
+
+ORG 1000h
+NUM1 DB 6
+NUM2 DB 3
+result DB ?
+
+
+ORG 2000h
+MOV BX, offset NUM1
+MOV AL, NUM2
+
+MULT: ADD CL, [BX]
+DEC AL
+JNZ MULT
+
+MOV result, CL
+hlt
+end

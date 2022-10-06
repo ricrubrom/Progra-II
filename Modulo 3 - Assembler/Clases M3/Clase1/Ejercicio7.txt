@@ -19,3 +19,21 @@ jnz suma
 mov res,AL
 hlt
 end
+
+//El que hizo Gonza
+
+ORG 1000h
+tabla DB 1,2,3,4,5
+result DB ?
+
+ORG 2000h
+MOV AX, offset result
+SUB AX, offset tabla
+MOV BX, offset result
+SUMA: dec BX
+ADD CL, [BX]
+dec AX
+JNZ SUMA
+MOV result, CX
+hlt
+end

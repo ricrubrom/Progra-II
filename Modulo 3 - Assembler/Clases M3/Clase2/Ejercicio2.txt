@@ -1,0 +1,5 @@
+a) El registro CL primero toma la longitud de la tabla, y luego la va decrementando, usandola como un contador.
+b) El programa recorre una tabla y cuenta el total de elementos que son menores que el maximo.
+c) Saltaria solamente si max y AL son iguales, lo cual (aunque sea con la tabla dada), no es posible.
+d) En vez de contar los menores contaria los mayores, pero no funciona ya que no se llega a una condicion de fin concreta.
+Para esto, primero deberia preguntarse por CL en lugar de los valores de la tabla

@@ -1,0 +1,16 @@
+ORG 1000H
+NUM1 DW 45
+NUM2 DW 50
+ORG 2000H
+       MOV AX,NUM1
+       ADD AX,NUM2
+IF:    CMP AX,100
+       JZ FIN
+       JNS MAYOR
+       JS MENOR
+MAYOR: DEC AX
+       JMP IF
+MENOR: INC AX
+       JMP IF
+FIN:   HLT
+END

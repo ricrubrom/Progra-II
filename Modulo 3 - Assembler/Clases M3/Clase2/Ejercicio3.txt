@@ -1,0 +1,33 @@
+A) 
+ORG 1000H
+
+ORG 2000H
+       MOV AL, 3
+       CMP AL,4
+       JZ THEN
+       JMP ELSE
+ THEN: MOV BL,1
+       INC CL
+       JMP FIN
+ ELSE: MOV BL,2
+       DEC CL
+       JMP FIN
+ FIN:  HLT
+END
+
+
+B)
+ORG 1000H
+
+ORG 2000H
+     MOV AL,10
+     MOV CL,1 
+     MOV BX,1000H
+FOR: ADD AL,AL
+     MOV [BX],AL
+     INC CL
+     CMP CL,10
+     JNZ FOR
+     JMP FIN
+FIN: HLT
+END

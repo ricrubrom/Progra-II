@@ -1,0 +1,5 @@
+A) Suma todos los numeros enteros que vienen antes del numero almacenado en AX
+b) CX termina en 6
+d) La principal limitacion es que AX no sea lo suficientemente grande como para que los llamados
+a la subrutina no se "salgan de su area". (AX deberia ser aproximadamente menor que 555h para que esto no suceda)
+Otra limitacion de AX es tal que la suma de todos sus numeros no ocurra un overflow.

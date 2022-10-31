@@ -1,0 +1,5 @@
+  proceso izquierda
+  comenzar
+    repetir 3
+      derecha
+  fin

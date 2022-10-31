@@ -1,0 +1,9 @@
+  proceso esPar(E valor : numero ; ES par: boolean)
+  comenzar
+    mientras (~((valor - 2) = 0)&(valor > 1))
+      valor := valor - 2
+    si valor - 2 = 0
+      esPar := V
+    sino
+      esPar := F
+  fin

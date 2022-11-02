@@ -1,0 +1,55 @@
+programa Ejercicio1
+
+
+procesos
+  proceso Recorrido(ES cantFlores : numero)
+  comenzar
+    repetir 9
+      mientras HayFlorEnLaEsquina
+        tomarFlor
+        cantFlores:=cantFlores+1
+      mover
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      cantFlores:=cantFlores+1
+  fin
+
+areas
+  AreaR1 : AreaP (1, 1, 1, 10)
+  AreaR2 : AreaP (2, 11, 2, 20)
+
+
+robots
+  robot robot1
+  variables
+    cantFlores : numero
+    aux : numero
+  comenzar
+    Recorrido(cantFlores)
+    EnviarMensaje(cantFlores, r2)
+    RecibirMensaje(aux, r2)
+    si(cantFlores > aux)
+      Informar(cantFlores - aux)
+  fin
+
+  robot robot2
+  variables
+    cantFlores : numero
+    aux : numero
+  comenzar
+    Recorrido(cantFlores)
+    EnviarMensaje(cantFlores, r1)
+    RecibirMensaje(aux, r1)
+    si(cantFlores > aux)
+      Informar(cantFlores - aux)
+  fin
+
+variables
+  r1: robot1
+  r2: robot2
+comenzar
+  AsignarArea(r1, AreaR1)
+  AsignarArea(r2, AreaR2)
+  Iniciar(r1, 1, 1)
+  Iniciar(r2, 2, 11)
+fin

@@ -21,7 +21,7 @@ areas
 robots
   robot tipo1
   variables
-    calleInicial, avenidaInicial, avenidaTP, calleTP, elementosTot, rob, aux: numero
+    maxrob,max,calleInicial, avenidaInicial, avenidaTP, calleTP, elementosTot, rob, aux: numero
   comenzar
     calleInicial := PosCa
     avenidaInicial := PosAv
@@ -36,9 +36,8 @@ robots
       EnviarMensaje(1, RC)
       RecibirMensaje(aux, RC)
     
-    EnviarMensaje(elementosTot, RC)
     EnviarMensaje(rob, RC)
-
+    EnviarMensaje(elementosTot, RC)
   fin
 
   robot coordinador
@@ -63,17 +62,35 @@ robots
           sino 
             EnviarMensaje(4, r4)
             RecibirMensaje(aux, r4)
-    repetir 4
+    repetir(4)
       RecibirMensaje(aux, *)
-      si aux>max
-        RecibirMensaje(aux, *)
-        rob:=aux
-      RecibirMensaje(aux, *)
+      si(aux = 1)
+        RecibirMensaje(cantidad, r1)
+        si max<cantidad
+          maxrob:=1
+          max:=cantidad
+      sino
+        si(aux = 2)
+          RecibirMensaje(cantidad, r2)
+          si max<cantidad
+            maxrob:=2
+            max:=cantidad
+        sino
+          si(aux = 3)
+            RecibirMensaje(cantidad, r3)
+            si max<cantidad
+              maxrob:=3
+              max:=cantidad
+          sino
+            RecibirMensaje(cantidad, r4)
+            si max<cantidad
+              maxrob:=4
+              max:=cantidad
     EnviarMensaje(5, r1)
     EnviarMensaje(5, r2)
     EnviarMensaje(5, r3)
     EnviarMensaje(5, r4)
-    Informar(rob)
+    Informar(maxrob)
   fin
 
 

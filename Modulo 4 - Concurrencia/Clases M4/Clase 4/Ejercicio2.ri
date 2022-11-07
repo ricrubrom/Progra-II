@@ -1,0 +1,106 @@
+programa Ejercicio2
+procesos
+  proceso RecogerFlores
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor 
+  fin
+
+  proceso RecogerPapeles
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel 
+  fin
+
+  proceso DejarFlores(E miAv: numero; E miCa: numero)
+  comenzar 
+    mientras(HayFlorEnLaBolsa)
+      BloquearEsquina(10, 10)
+      Pos(10, 10)
+      depositarFlor
+      Pos(miAv, miCa)
+      LiberarEsquina(10, 10)
+  fin
+
+  proceso DejarPapeles(E miAv: numero; E miCa: numero)
+  comenzar 
+    mientras(HayPapelEnLaBolsa)
+      BloquearEsquina(10, 10)
+      Pos(10, 10)
+      depositarPapel
+      Pos(miAv, miCa)
+      LiberarEsquina(10, 10)
+  fin
+
+areas
+  AreaF : AreaC(1, 1, 5, 10)
+  AreaPa : AreaC(6, 1, 10, 9)
+  AreaRF1 : AreaP(6, 10, 6, 10)
+  AreaRF2 : AreaP(7, 10, 7, 10)
+  AreaRP1 : AreaP(8, 10, 8, 10)
+  AreaRP2 : AreaP(9, 10, 9, 10)
+  Area10: AreaC(10, 10, 10, 10)
+robots
+  robot florero
+  variables
+    randomAv, randomCa, miAv, miCa: numero
+  comenzar
+    miAv := PosAv
+    miCa := PosCa
+    repetir(5)
+      Random(randomAv, 1, 5)
+      Random(randomCa, 1, 10)
+      BloquearEsquina(randomAv, randomCa)
+      Pos(randomAv, randomCa)
+      RecogerFlores
+      Pos(miAv, miCa)
+      LiberarEsquina(randomAv, randomCa)
+    DejarFlores(miAv, miCa)
+  fin
+
+  robot papelero
+  variables
+    randomAv, randomCa, miAv, miCa: numero
+  comenzar
+    miAv := PosAv
+    miCa := PosCa
+    repetir(3)
+      Random(randomAv, 6, 10)
+      Random(randomCa, 1, 9)
+      BloquearEsquina(randomAv, randomCa)
+      Pos(randomAv, randomCa)
+      RecogerPapeles
+      Pos(miAv, miCa)
+      LiberarEsquina(randomAv, randomCa)
+    DejarPapeles(miAv, miCa)
+  fin
+
+
+variables
+  RF1 : florero
+  RF2 : florero
+  RP1 : papelero
+  RP2 : papelero
+comenzar
+  AsignarArea(RF1, AreaF)
+  AsignarArea(RF2, AreaF)
+  
+  AsignarArea(RP1, AreaPa)
+  AsignarArea(RP2, AreaPa)
+  
+  AsignarArea(RF1, AreaRF1)
+  AsignarArea(RF2, AreaRF2)
+  
+  AsignarArea(RP1, AreaRP1)
+  AsignarArea(RP2, AreaRP2)
+  
+  AsignarArea(RF1, Area10)
+  AsignarArea(RF2, Area10)
+  AsignarArea(RP1, Area10)
+  AsignarArea(RP2, Area10)
+  
+  Iniciar(RF1, 6, 10)
+  Iniciar(RF2, 7, 10)
+  Iniciar(RP1, 8, 10)
+  Iniciar(RP2, 9, 10)
+fin

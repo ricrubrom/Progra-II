@@ -90,7 +90,6 @@ robots
     aux : boolean
   comenzar
     inicio:=1
-    JuntarFlores(inicio, total)
     EnviarMensaje(15, R1)
     EnviarMensaje(20, R1)
     EnviarMensaje(15, R1)
@@ -99,6 +98,7 @@ robots
     EnviarMensaje(20, R2)
     EnviarMensaje(15, R2)
 
+    JuntarFlores(inicio, total)
     total := 0
     repetir(2)
       RecibirMensaje(aux, *)

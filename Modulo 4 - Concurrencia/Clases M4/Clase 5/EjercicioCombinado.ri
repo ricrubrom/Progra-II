@@ -1,0 +1,155 @@
+programa EjercicioCombinado
+procesos
+  proceso Competicion(E ganador1 : numero; E ganador2 : numero; E ID : numero)
+  comenzar
+    si ganador1=ID
+      Pos(50,1)
+      repetir 99
+        mover
+    sino
+      si ganador2=ID
+        Pos(60,1)
+        repetir(99)
+          mover
+  fin
+  proceso RecogerFlores(ES flores: numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      flores:= flores + 1
+  fin
+  proceso Avenida(ES flores: numero)
+  comenzar
+    repetir 99
+      RecogerFlores(flores)
+      mover
+    RecogerFlores(flores)
+  fin
+  
+  proceso Maximo(E rob: numero; E flores: numero; ES ganador1: numero; ES ganador2: numero ES max1: numero; ES max2: numero)
+  comenzar 
+    si(flores > max1)
+      max2 := max1
+      ganador2 := ganador1
+      max1 := flores 
+      ganador1 := rob
+    sino
+      si(flores > max2)
+        max2 := flores 
+        ganador2 := rob
+  fin
+areas
+  AreaR : AreaC(97, 1, 100, 100)
+  AreaIR1 : AreaP(1, 2, 1, 2)
+  AreaIR2 : AreaP(1, 3, 1, 3)
+  AreaIR3 : AreaP(1, 4, 1, 4)
+  AreaIR4 : AreaP(1, 5, 1, 5)
+  AreaGanador1 : AreaPC(50,1,50,100)
+  AreaGanador2 : AreaPC(60,1,60,100)
+  AreaAD : AreaP(1, 1, 1, 1)
+robots
+  robot ejecutor
+  variables
+    ID, av, flores, ganador1, ganador2 : numero
+  comenzar
+    RecibirMensaje(ID, RAD)
+    RecibirMensaje(av, RAD)
+    Pos(av, 1)
+    Avenida(flores)
+    EnviarMensaje(ID, RAD)
+    EnviarMensaje(flores, RAD)
+    RecibirMensaje(ganador1, RAD)
+    RecibirMensaje(ganador2, RAD)
+    Competicion(ganador1, ganador2, ID)
+    si(ganador1 = ID)|(ganador2 = ID)
+      EnviarMensaje(ID, RAD)
+ 
+  fin
+
+  
+  robot admin
+  variables 
+    total, flores, max1, max2, ganador1, ganador2, rob, supercampeon: numero
+  comenzar
+    EnviarMensaje(1, R1)
+    EnviarMensaje(97, R1)
+    
+    EnviarMensaje(2, R2)
+    EnviarMensaje(98, R2)
+    
+    EnviarMensaje(3, R3)
+    EnviarMensaje(99, R3)
+    
+    EnviarMensaje(4, R4)
+    EnviarMensaje(100, R4)
+    
+    ganador1 := -1
+    ganador2 := -1
+    max1:= -1
+    max2 := -2
+    total:= 0
+    repetir(4)
+      RecibirMensaje(rob, *)
+      si(rob = 1)
+        RecibirMensaje(flores, R1)
+      sino
+        si(rob = 2)
+          RecibirMensaje(flores, R2)
+        sino
+          si(rob = 3)
+            RecibirMensaje(flores, R3)
+          sino
+            RecibirMensaje(flores, R4)
+      total := total + flores
+      Maximo(rob, flores, ganador1, ganador2, max1, max2)
+    
+    Informar(total)
+
+    EnviarMensaje(ganador1, R1)
+    EnviarMensaje(ganador2, R1)
+
+    EnviarMensaje(ganador1, R2)
+    EnviarMensaje(ganador2, R2)
+
+    EnviarMensaje(ganador1, R3)
+    EnviarMensaje(ganador2, R3)
+
+    EnviarMensaje(ganador1, R4)
+    EnviarMensaje(ganador2, R4)
+
+    RecibirMensaje(supercampeon, *)
+    Informar(supercampeon)
+  fin
+
+variables
+  R1, R2, R3, R4 : ejecutor
+  RAD : admin
+comenzar
+  AsignarArea(R1, AreaR)
+  AsignarArea(R1, AreaIR1)
+  AsignarArea(R1, AreaGanador1)
+  AsignarArea(R1, AreaGanador2)
+
+  AsignarArea(R2, AreaR)
+  AsignarArea(R2, AreaIR2)
+  AsignarArea(R2, AreaGanador1)
+  AsignarArea(R2, AreaGanador2)
+
+  AsignarArea(R3, AreaR)
+  AsignarArea(R3, AreaIR3)
+  AsignarArea(R3, AreaGanador1)
+  AsignarArea(R3, AreaGanador2)
+
+  AsignarArea(R4, AreaR)
+  AsignarArea(R4, AreaIR4)
+  AsignarArea(R4, AreaGanador1)
+  AsignarArea(R4, AreaGanador2)
+  
+  AsignarArea(RAD, AreaAD)
+
+  Iniciar(R1, 1, 2)
+  Iniciar(R2, 1, 3)
+  Iniciar(R3, 1, 4)
+  Iniciar(R4, 1, 5)
+  Iniciar(RAD, 1, 1)
+fin

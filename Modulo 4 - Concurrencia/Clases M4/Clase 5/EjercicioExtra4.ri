@@ -1,0 +1,133 @@
+programa EjercicioExtra3
+procesos
+  proceso JuntarFlores(E inicio: numero; ES flores: numero)
+  comenzar
+    BloquearEsquina(10, 10)
+    Pos(10,10)
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      flores := flores + 1
+    Pos(inicio, inicio)
+    LiberarEsquina(10, 10)
+  fin
+  
+  proceso RecolectarFlores(ES flores: numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      flores := flores + 1
+  fin
+
+  proceso Calle(E ancho: numero; ES flores: numero)
+  comenzar
+    repetir(ancho)
+      RecolectarFlores(flores)
+      mover
+  fin
+
+  proceso Avenida(E alto: numero; ES flores: numero)
+  comenzar
+    repetir(alto)
+      RecolectarFlores(flores)
+      mover
+  fin
+
+  proceso Perimetro(ES flores: numero; E inicio:numero; E esqPerimetro: numero; E alto: numero; E ancho: numero)
+  comenzar 
+    Pos(esqPerimetro, esqPerimetro)
+    repetir(2)
+      Avenida(alto, flores)
+      derecha
+      Calle(ancho, flores)
+      derecha
+    Pos(inicio, inicio)
+  fin
+
+  proceso DepositarFlores(E inicio: numero)
+  comenzar
+    BloquearEsquina(10, 10)
+    Pos(10, 10)
+    mientras(HayFlorEnLaBolsa)
+      depositarFlor
+    Pos(inicio, inicio)
+    LiberarEsquina(10, 10)
+  fin
+areas
+  Area1-Av1: AreaP(15, 15, 15, 35)
+  Area1-Av2: AreaP(30, 15, 30, 35)
+  Area1-Ca1: AreaP(16, 35, 29, 35)
+  Area1-Ca2: AreaP(16, 15, 29, 15)
+  AreaR1: AreaP(2, 2, 2, 2)
+
+  Area2-Av1: AreaP(40, 40, 40, 60)
+  Area2-Av2: AreaP(55, 40, 55, 60)
+  Area2-Ca1: AreaP(41, 60, 54, 60)
+  Area2-Ca2: AreaP(41, 40, 54, 40)
+  AreaR2: AreaP(6, 6, 6, 6)
+
+  Area10: AreaC(10, 10, 10, 10)
+
+  AreaRJ: AreaP(1, 1, 1, 1)
+
+robots
+  robot recolector
+  variables 
+    inicio, esqPerimetro, alto, ancho, flores: numero
+  comenzar
+    flores := 0
+    inicio := PosAv
+    RecibirMensaje(esqPerimetro, RJ)
+    RecibirMensaje(alto, RJ)
+    RecibirMensaje(ancho, RJ)
+    Perimetro(flores, inicio, esqPerimetro, alto, ancho)
+    DepositarFlores(inicio)
+    EnviarMensaje(V, RJ)
+  fin
+
+  robot jefe
+  variables 
+    total, inicio: numero
+    aux : boolean
+  comenzar
+    inicio:=1
+    JuntarFlores(inicio, total)
+    EnviarMensaje(15, R1)
+    EnviarMensaje(20, R1)
+    EnviarMensaje(15, R1)
+
+    EnviarMensaje(40, R2) 
+    EnviarMensaje(20, R2)
+    EnviarMensaje(15, R2)
+
+    total := 0
+    repetir(2)
+      RecibirMensaje(aux, *)
+    JuntarFlores(inicio, total)
+    Informar(total)
+  fin
+
+variables
+  R1, R2: recolector
+  RJ: jefe
+comenzar
+  AsignarArea(R1, Area1-Av1)
+  AsignarArea(R1, Area1-Av2)
+  AsignarArea(R1, Area1-Ca1)
+  AsignarArea(R1, Area1-Ca2)
+  AsignarArea(R1, AreaR1)
+  AsignarArea(R1, Area10)
+
+  AsignarArea(R2, Area2-Av1)
+  AsignarArea(R2, Area2-Av2)
+  AsignarArea(R2, Area2-Ca1)
+  AsignarArea(R2, Area2-Ca2)
+  AsignarArea(R2, AreaR2)
+  AsignarArea(R2, Area10)
+
+  AsignarArea(RJ, AreaRJ)
+  AsignarArea(RJ, Area10)
+
+  Iniciar(R1, 2, 2)
+  Iniciar(R2, 6, 6)
+  Iniciar(RJ, 1, 1)
+fin

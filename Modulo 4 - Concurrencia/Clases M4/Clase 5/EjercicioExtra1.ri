@@ -1,0 +1,82 @@
+programa EjercicioExtra1
+procesos
+  proceso RecolectarFlores
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+  fin
+
+  proceso Calle
+  comenzar
+    repetir(15)
+      RecolectarFlores
+      mover
+  fin
+
+  proceso Avenida
+  comenzar
+    repetir(20)
+      RecolectarFlores
+      mover
+  fin
+
+  proceso Perimetro
+  comenzar 
+    repetir(2)
+      Avenida 
+      derecha
+      Calle
+      derecha
+  fin
+
+  proceso DepositarFlores
+  variables 
+    inicio: numero
+  comenzar
+    inicio := PosAv
+    BloquearEsquina(10, 10)
+    Pos(10, 10)
+    mientras(HayFlorEnLaBolsa)
+      depositarFlor
+    Pos(inicio, inicio)
+    LiberarEsquina(10, 10)
+  fin
+areas
+  Area1-Av1: AreaP(15, 15, 15, 35)
+  Area1-Av2: AreaP(30, 15, 30, 35)
+  Area1-Ca1: AreaP(16, 35, 29, 35)
+  Area1-Ca2: AreaP(16, 15, 29, 15)
+
+  Area2-Av1: AreaP(40, 40, 40, 60)
+  Area2-Av2: AreaP(55, 40, 55, 60)
+  Area2-Ca1: AreaP(41, 60, 54, 60)
+  Area2-Ca2: AreaP(41, 40, 54, 40)
+
+  Area10: AreaC(10, 10, 10, 10)
+
+
+robots
+  robot recolector
+  comenzar
+    Perimetro
+    DepositarFlores
+  fin
+
+variables
+  R1, R2: recolector
+comenzar
+  AsignarArea(R1, Area1-Av1)
+  AsignarArea(R1, Area1-Av2)
+  AsignarArea(R1, Area1-Ca1)
+  AsignarArea(R1, Area1-Ca2)
+  AsignarArea(R1, Area10)
+
+  AsignarArea(R2, Area2-Av1)
+  AsignarArea(R2, Area2-Av2)
+  AsignarArea(R2, Area2-Ca1)
+  AsignarArea(R2, Area2-Ca2)
+  AsignarArea(R2, Area10)
+
+  Iniciar(R1, 15, 15)
+  Iniciar(R2, 40, 40)
+fin

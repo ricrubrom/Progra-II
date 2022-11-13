@@ -1,0 +1,27 @@
+;Aclaracion: Es necesario pushear ultimo la letra a la pila antes del llamado
+
+
+ES_VOCAL: PUSH AX                                   ;Guardamos el dato
+          PUSH BX                                   ;Guardamos el dato
+          PUSHF                                     ;Guardamos las flags
+          MOV BX, SP    
+          ADD BX, 8                                 ;Me muevo a la posicion en pila de la letra almacenada
+          MOV AL, [BX]                              ;Guardo la letra en AL
+          MOV AH, OFFSET CantVoc - OFFSET Vocales   ;Longitud de cadena de vocales
+          MOV BX, OFFSET Vocales                    ;posicion en memoria de la tabla de vocales
+          MOV DH, 0                                 ;DH guarda Resultado (0FFH si es vocal, 0 si no)
+
+ITERO:    CMP AL, [BX]                              ;Comparo la letra con una vocal
+          JZ ES_VOC                                 ;Si es vocal, salto a asignar el Resultado
+          CMP AH, 0                                 ;Si no existen mas vocales que comparar, salimos de la iteracion
+          JZ FINRUT                                 
+          INC BX                                    ;Nos movemos en la tabla de vocales
+          DEC AH                                    ;Decrementamos indicando que queda una vocal menos que comparar
+          JMP ITERO
+
+ES_VOC:  MOV DH, 0FFH                               ;Si es vocal guardo el Resultado
+
+FINRUT:  POPF                                       ;Recuperamos las flags
+         POP BX                                     ;Recupero el dato
+         POP AX                                     ;Recupero el dato
+         RET

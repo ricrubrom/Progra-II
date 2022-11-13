@@ -83,3 +83,121 @@ JNS FOR
 MOV TOT,DH
 HLT
 END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ORG 1000H
+Cadena DB "LeandroMatias"
+Vocales DB "aeiouAEIOU"
+CantVoc DB ?
+
+
+ORG 3000H
+ES_VOCAL: PUSH AX
+          PUSH BX
+          MOV BX, SP
+          ADD BX, 6
+          MOV AL, [BX]
+          MOV AH, OFFSET CantVoc - OFFSET Vocales
+          MOV BX, OFFSET Vocales
+          MOV DH, 0
+
+ITERO:    CMP AL, [BX]
+          JZ ES_VOC
+          CMP AH, 0
+          JZ FINRUT
+          INC BX
+          DEC AH
+          JMP ITERO
+
+ES_VOC:  MOV DH, 0FFH
+
+FINRUT:  POP BX
+         POP AX
+         RET
+
+
+SWAP:    PUSH BX
+         PUSH DX
+
+         MOV BX, AX
+         MOV DL, [BX] ; Guardo el valor 1
+         MOV BX, CX
+         MOV DH, [BX] ;Guardo el valor 2
+         MOV [BX], DL
+         MOV BX, AX
+         MOV [BX], DH
+
+         POP DX
+         POP BX
+RET
+
+
+
+
+
+
+ORG 2000H
+         MOV AX, OFFSET Cadena
+         MOV CX, OFFSET Vocales - 1 ;dejo a CX en la ultima posicion de la cadena
+         MOV DL, 0 ; Contador de vocales
+
+WHILE:   CMP AX, CX
+         JZ ULTIMO
+         CMP AX, CX
+         JNS FIN
+
+SIGO:    MOV BX, AX
+         MOV BL, [BX]
+         MOV BH, 0
+         PUSH BX
+         CALL ES_VOCAL
+         POP BX
+         CMP DH, 0FFH
+         JNZ SIGO2
+         INC DL
+
+SIGO2:   MOV BX, CX
+         MOV BL, [BX]
+         MOV BH, 0
+         PUSH BX
+         CALL ES_VOCAL
+         POP BX
+         CMP DH, 0FFH
+         JNZ SIGO3
+         INC DL
+
+SIGO3:   CALL SWAP
+         INC AX
+         DEC CX
+         JMP WHILE
+
+
+ULTIMO:  MOV BX, AX ;Verifico si es vocal
+         MOV BL, [BX]
+         MOV BH, 0
+         PUSH BX
+         CALL ES_VOCAL
+         POP BX
+         CMP DH, 0FFH
+         JNZ FIN
+         INC DL
+
+
+FIN:     MOV CantVoc, DL
+HLT
+END

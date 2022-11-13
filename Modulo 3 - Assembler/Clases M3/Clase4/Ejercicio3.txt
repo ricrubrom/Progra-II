@@ -45,30 +45,47 @@ POS DB 2H ;POSICIONES A ROTAR DERECHA
 
 ORG 3000H
 
-ROTARIZQ: MOV BX, AX
-FOR: MOV AL, [BX]
-MOV CL, AL
-ADD CL, AL
-JC CARRY
-JMP SIG
-CARRY: INC CL
-SIG: DEC CH
-MOV [BX], CL
-JNZ FOR
-FIN: RET
+ROTARIZQ:   PUSH AX
+            PUSH BX
+            PUSH CX
+            PUSHF
+            MOV BX, AX
+FOR:        MOV AL, [BX]
+            MOV CL, AL
+            ADD CL, AL
+            JC CARRY
+            JMP SIG
+CARRY:      INC CL
+SIG:        DEC CH
+            MOV [BX], CL
+            JNZ FOR
+FIN:        POPF
+            POP CX
+            POP BX
+            POP AX
+            RET
 
-ROTARDER: MOV CL, 0
-FOR2: MOV CH, 7
-MOV AL, DL
-CALL ROTARIZQ
-DEC DH
-JNZ FOR2
-FIN2: RET
+ROTARDER:   PUSH AX
+            PUSH BX
+            PUSH CX
+            PUSHF
+            MOV CL, 0
+FOR2:       MOV CH, 7
+            PUSH AX
+            CALL ROTARIZQ
+            POP AX
+            DEC DH
+            JNZ FOR2
+FIN2:       POPF
+            POP CX
+            POP BX
+            POP AX
+            RET
 
 ORG 2000H
 MOV AX, OFFSET NUM1
-MOV DX, AX
 MOV DH, POS
 CALL ROTARDER
 HLT
+END
 END

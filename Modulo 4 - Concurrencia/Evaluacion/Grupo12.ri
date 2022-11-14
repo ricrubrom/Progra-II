@@ -1,5 +1,9 @@
 programa Grupo12
+
 procesos
+
+  {Procesos del Cosechador}
+  
   proceso DepositarFlores(E miAv: numero; E miCa: numero)
   comenzar
     BloquearEsquina(100, 1)
@@ -9,20 +13,60 @@ procesos
     Pos(miAv, miCa)
     LiberarEsquina(100, 1)
   fin
+
   proceso JuntarFlores(ES flores: numero)
   comenzar
     mientras(HayFlorEnLaEsquina)
       tomarFlor
       flores := flores + 1
   fin
-  proceso LimpiarEsquina(ES flores: numero;E randomAv: numero; E randomCa: numero; E miAv: numero; E miCa: numero)
+
+  proceso LimpiarEsquina(ES flores: numero; E miAv: numero; E miCa: numero)
+  variables 
+    randomAv, randomCa : numero
   comenzar
+    Random(randomAv, 10, 75)
+    Random(randomCa, 10, 40)
     BloquearEsquina(randomAv, randomCa)
     Pos(randomAv, randomCa)
     JuntarFlores(flores)
     Pos(miAv, miCa)
     LiberarEsquina(randomAv, randomCa)
   fin
+  
+  
+  {Procesos del Sembrador}
+  
+  proceso RecogerElementos(ES papeles: numero)
+  comenzar 
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor 
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      papeles := papeles + 1
+  fin
+  
+  proceso Sembrado(E miAv: numero; E miCa: numero; E randomCa: numero; ES papeles: numero; ES sigo: boolean)
+  comenzar
+    BloquearEsquina(100, 1)
+    Pos(100, 1)
+    si(HayFlorEnLaEsquina)
+      tomarFlor
+    sino
+      sigo := F
+    Pos(miAv, miCa)
+    LiberarEsquina(100, 1)
+    
+    si(sigo)
+      BloquearEsquina(1, randomCa)
+      Pos(1, randomCa)
+      RecogerElementos(papeles)
+      depositarFlor
+      Pos(miAv, miCa)
+      LiberarEsquina(1, randomCa)
+  fin
+
+
 areas
   AreaRJ : AreaP(50, 50, 50, 50)
   AreaC1 : AreaP(6, 8, 6, 8)
@@ -30,9 +74,12 @@ areas
   AreaC3 : AreaP(10, 8, 10, 8)
   AreaS1 : AreaP(99, 99, 99, 99)
   AreaS2 : AreaP(99, 100, 99, 100)
+
   AreaCosecha : AreaC(10, 10, 75, 40)
   AreaDeposito : AreaC(100, 1, 100, 1)
   AreaSembrado : AreaC(1, 1, 1, 100)
+
+
 robots
   robot Coshechador
   variables
@@ -42,28 +89,59 @@ robots
     miAv := PosAv
     miCa := PosCa
     repetir(5)
-      Random(randomAv, 10, 75)
-      Random(randomCa, 10, 40)
-      LimpiarEsquina(flores, randomAv, randomCa, miAv, miCa)
+      LimpiarEsquina(flores, miAv, miCa)
     DepositarFlores(miAv, miCa)
     EnviarMensaje(flores, RJ)
   fin
 
+
   robot Sembrador
   variables
-    randomCa : numero
+    ID, miAv, miCa, randomCa, papeles: numero
+    sigo: boolean
   comenzar
-
+    sigo := V
+    papeles := 0
+    miAv := PosAv 
+    miCa := PosCa
+    RecibirMensaje(ID, RJ) 
+    mientras(sigo)
+      Random(randomCa, 1, 100)
+      Sembrado(miAv, miCa, randomCa, papeles, sigo)
+      
+    EnviarMensaje(ID, RJ)
+    EnviarMensaje(papeles, RJ)
   fin
+
 
   robot Jefe
   variables
-    totalFlores : numero 
+    totalFlores, receptor, rob, robMin, min : numero
   comenzar
-    {EnviarMensaje(S1, 1)
-    EnviarMensaje(S2, 2)}
-
+    totalFlores := 0
+    rob := 0
+    robMin := 0
+    min := 99999
+    receptor := 0
+    repetir(3)
+      RecibirMensaje(receptor, *)
+      totalFlores := totalFlores + receptor
+    Informar('TotalDeFloresRecolectadas', totalFlores)
+    EnviarMensaje(1, S1)
+    EnviarMensaje(2, S2)
+    
+    repetir(2)
+      RecibirMensaje(rob, *)
+      si(rob = 1)
+        RecibirMensaje(receptor, S1)
+      sino
+        RecibirMensaje(receptor, S2)
+      si(receptor < min)
+        min := receptor
+        robMin := rob
+    Informar('RobotConMenorCantidadDePapeles', robMin)
   fin
+
 
 variables
   C1, C2, C3 : Coshechador
@@ -71,30 +149,30 @@ variables
   RJ : Jefe
 comenzar
   AsignarArea(C1, AreaC1)
-  AsignarArea(C1, AreaCosecha)
+  AsignarArea(C1, AreaCosecha)      {Asignaciones Cosechador 1}
   AsignarArea(C1, AreaDeposito)
 
   AsignarArea(C2, AreaC2)
-  AsignarArea(C2, AreaCosecha)
+  AsignarArea(C2, AreaCosecha)      {Asignaciones Cosechador 2}
   AsignarArea(C2, AreaDeposito)
 
   AsignarArea(C3, AreaC3)
-  AsignarArea(C3, AreaCosecha)
+  AsignarArea(C3, AreaCosecha)      {Asignaciones Cosechador 3}
   AsignarArea(C3, AreaDeposito)
 
   AsignarArea(S1, AreaS1)
-  AsignarArea(S1, AreaSembrado)
+  AsignarArea(S1, AreaSembrado)     {Asignaciones Sembrador 1}
   AsignarArea(S1, AreaDeposito)
 
   AsignarArea(S2, AreaS2)
-  AsignarArea(S2, AreaSembrado)
+  AsignarArea(S2, AreaSembrado)     {Asignaciones Sembrador 2}
   AsignarArea(S2, AreaDeposito)
 
-  AsignarArea(RJ, AreaRJ)
+  AsignarArea(RJ, AreaRJ)           {Asignaciones Jefe}
 
   Iniciar(C1, 6, 8)
   Iniciar(C2, 8, 8)
-  Iniciar(C3, 10, 8)
+  Iniciar(C3, 10, 8)                {Inicio de los robots}
   Iniciar(S1, 99,99)
   Iniciar(S2, 99, 100)
   Iniciar(RJ, 50, 50)

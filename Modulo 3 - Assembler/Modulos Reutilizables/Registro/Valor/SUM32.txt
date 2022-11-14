@@ -1,0 +1,11 @@
+;Aclaraciones: AX y BX tienen los low, CX y DX tienen los High
+
+
+SUM32:  PUSHF
+        ADD CX,DX  ;Sumamos los High
+        ADD AX,BX  ;Sumamos los Low
+        JC CARRY   ;Si en la suma de los low se prende la flag de carry, incrementamos el resultado de los High (CX)
+        JMP FIN
+CARRY:  INC CX
+FIN:    POPF
+        RET

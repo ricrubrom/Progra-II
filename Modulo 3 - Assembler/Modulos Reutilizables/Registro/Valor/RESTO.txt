@@ -1,0 +1,12 @@
+;Aclaraciones: DX guarda el numero, y termina con el resto. CX tiene el divisor
+
+RESTO:  PUSH CX
+        PUSHF
+WHILE:  CMP DX, CX      ;Comparamos si el numero es mayor al divisor
+        JS FIN          ;Si el divisor es mayor al numero, no podemos seguir dividiendo y vamos a fin
+        SUB DX, CX      ;En caso contrario restamos al numero el divisor
+        JMP WHILE       ;Saltamos para repetir la instrucciones
+
+FIN:    POPF
+        POP CX
+        RET

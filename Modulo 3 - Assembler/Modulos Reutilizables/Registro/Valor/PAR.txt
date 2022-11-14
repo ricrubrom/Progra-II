@@ -1,0 +1,12 @@
+;Aclaraciones: La subrutina devuelve en CX 01 si el numero es par, y 00 si es impar.
+
+ORG 3000H 
+ES_PAR:  PUSHF
+         AND CX,1
+         CMP CX,1
+         JZ IMPAR
+PAR:     MOV CX, 01H
+         JMP FIN
+IMPAR:   MOV CX, 00H
+FIN:     POPF
+         RET

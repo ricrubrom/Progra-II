@@ -1,0 +1,24 @@
+;Aclaraciones:  Primero se declaran los low y luego los high, primero num1 despues num2 
+;               AX tiene la posicion de num1H, CX la de num2H
+
+
+SUM32:  PUSH BX
+        PUSH CX
+        PUSHF
+        MOV BX,AX       ;Pasamos la direccion de num1H a BX
+        MOV DX,[BX]     ;Copiamos el valor almacenado en la direccion de BX en DX
+        MOV BX,CX       ;Pasamos la direccion de num2H a BX
+        ADD DX,[BX]     ;Sumamos los High
+        SUB AX,2H       ;Decrementamos la posicion de memoria almacenada en AX por 2, lo que nos lleva a num1L
+        SUB CX,2H       ;Decrementamos la posicion de memoria almacenada en CX por 2, lo que nos lleva a num2L
+        MOV BX,AX       ;Pasamos la direccion de num1L a BX
+        MOV AX,[BX]     ;Copiamos el valor almacenado en la direccion de BX en AX
+        MOV BX,CX       ;Pasamos la direccion de num2L a BX
+        ADD AX,[BX]     ;Sumamos los Low
+        JC CARRY        ;Si se prende en carry en la suma de los Low, incrementamos la suma de los High
+        JMP FIN
+CARRY:  INC DX
+FIN:    POPF
+        POP CX
+        POP BX
+        RET

@@ -1,0 +1,11 @@
+;Aclaraciones:  antes del llamado se debe almacenar el dato a comparar. El resultado se guarda en AL
+
+ES_IMPAR:   PUSH BX
+            PUSHF
+            MOV BX, SP              ;Movemos el IP a BX
+            ADD BX, 6H              ;Le sumamos 6 para llegar al dato a analizar
+            MOV AX,[BX]             ;Pasamos el dato a AX
+            AND AX,1H               ;Aplicamos un AND con una mascara de 1, lo cual devuelve 1 si es impar y 0 si es par
+FIN:        POPF
+            POP BX
+            RET

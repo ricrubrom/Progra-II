@@ -1,0 +1,16 @@
+;Aclaraciones:  Este modulo cuenta la cantidad de caracteres de una cadena. La direccion en memoria de la cadena 
+;               esta almacenada en BX, y en DL se guarda el caracter de terminacion.
+;               En CL se almacena el resultado
+
+CONCAR: PUSH BX
+        PUSH DX
+        PUSHF
+WHILE:  CMP [BX],DL
+        JZ FIN
+        INC CL
+        INC BX
+        JMP WHILE
+FIN:    POPF
+        POP DX
+        POP BX
+        RET

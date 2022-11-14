@@ -1,0 +1,11 @@
+;Aclaraciones:  PUSH primero la direccion del dato almacenado, luego pushear el sumando
+
+SUMA:   PUSHF
+        MOV BX, SP      ;Movemos el IP a BX
+        ADD BX, 4       ;Le sumamos 4 a BX para llegar a la posicion en memoria del valor a sumar
+        MOV AL, [BX]    ;Muevo el valor a sumar a AL
+        ADD BX, 2       ;Sumo 2 a BX para llegar a la psocion en memoria donde se encuentra almacenada la posicion del dato a ser sumado
+        MOV BX, [BX]    ;Recuperamos dicha direccion en BX
+        ADD [BX], AL    ;Sumamos a la posicion almacenada en BX el sumando
+        POPF
+RET

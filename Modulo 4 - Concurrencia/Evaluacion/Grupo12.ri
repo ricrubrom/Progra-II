@@ -1,0 +1,101 @@
+programa Grupo12
+procesos
+  proceso DepositarFlores(E miAv: numero; E miCa: numero)
+  comenzar
+    BloquearEsquina(100, 1)
+    Pos(100, 1)
+    mientras(HayFlorEnLaBolsa)
+      depositarFlor
+    Pos(miAv, miCa)
+    LiberarEsquina(100, 1)
+  fin
+  proceso JuntarFlores(ES flores: numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      flores := flores + 1
+  fin
+  proceso LimpiarEsquina(ES flores: numero;E randomAv: numero; E randomCa: numero; E miAv: numero; E miCa: numero)
+  comenzar
+    BloquearEsquina(randomAv, randomCa)
+    Pos(randomAv, randomCa)
+    JuntarFlores(flores)
+    Pos(miAv, miCa)
+    LiberarEsquina(randomAv, randomCa)
+  fin
+areas
+  AreaRJ : AreaP(50, 50, 50, 50)
+  AreaC1 : AreaP(6, 8, 6, 8)
+  AreaC2 : AreaP(8, 8, 8, 8)
+  AreaC3 : AreaP(10, 8, 10, 8)
+  AreaS1 : AreaP(99, 99, 99, 99)
+  AreaS2 : AreaP(99, 100, 99, 100)
+  AreaCosecha : AreaC(10, 10, 75, 40)
+  AreaDeposito : AreaC(100, 1, 100, 1)
+  AreaSembrado : AreaC(1, 1, 1, 100)
+robots
+  robot Coshechador
+  variables
+    randomAv, randomCa, miAv, miCa, flores : numero
+  comenzar
+    flores := 0
+    miAv := PosAv
+    miCa := PosCa
+    repetir(5)
+      Random(randomAv, 10, 75)
+      Random(randomCa, 10, 40)
+      LimpiarEsquina(flores, randomAv, randomCa, miAv, miCa)
+    DepositarFlores(miAv, miCa)
+    EnviarMensaje(flores, RJ)
+  fin
+
+  robot Sembrador
+  variables
+    randomCa : numero
+  comenzar
+
+  fin
+
+  robot Jefe
+  variables
+    totalFlores : numero 
+  comenzar
+    {EnviarMensaje(S1, 1)
+    EnviarMensaje(S2, 2)}
+
+  fin
+
+variables
+  C1, C2, C3 : Coshechador
+  S1, S2 : Sembrador
+  RJ : Jefe
+comenzar
+  AsignarArea(C1, AreaC1)
+  AsignarArea(C1, AreaCosecha)
+  AsignarArea(C1, AreaDeposito)
+
+  AsignarArea(C2, AreaC2)
+  AsignarArea(C2, AreaCosecha)
+  AsignarArea(C2, AreaDeposito)
+
+  AsignarArea(C3, AreaC3)
+  AsignarArea(C3, AreaCosecha)
+  AsignarArea(C3, AreaDeposito)
+
+  AsignarArea(S1, AreaS1)
+  AsignarArea(S1, AreaSembrado)
+  AsignarArea(S1, AreaDeposito)
+
+  AsignarArea(S2, AreaS2)
+  AsignarArea(S2, AreaSembrado)
+  AsignarArea(S2, AreaDeposito)
+
+  AsignarArea(RJ, AreaRJ)
+
+  Iniciar(C1, 6, 8)
+  Iniciar(C2, 8, 8)
+  Iniciar(C3, 10, 8)
+  Iniciar(S1, 99,99)
+  Iniciar(S2, 99, 100)
+  Iniciar(RJ, 50, 50)
+fin

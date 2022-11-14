@@ -6,25 +6,30 @@ NUM2H DW 3245H
 
 
 ORG 3000H
-SUM32: MOV BX,AX
-MOV DX,[BX]
-MOV BX,CX
-ADD DX,[BX]
-SUB AX,2H
-SUB CX,2H
-MOV BX,AX
-MOV AX,[BX]
-MOV BX,CX
-ADD AX,[BX]
-JC CARRY
-JMP FIN
-CARRY: INC DX
-FIN: RET
+SUM32:  PUSH BX
+        PUSH CX
+        PUSHF
+        MOV BX,AX       ;Pasamos la direccion de num1L a BX
+        MOV DX,[BX]     ;Copiamos el valor almacenado en la direccion de BX en DX
+        MOV BX,CX       ;Pasamos la direccion de num2L a BX
+        ADD DX,[BX]     ;Sumamos los Low
+        PUSHF           
+        ADD AX,2H       ;Incrementamos la posicion de memoria almacenada en AX por 2, lo que nos lleva a num1L
+        ADD CX,2H       ;Incrementamos la posicion de memoria almacenada en CX por 2, lo que nos lleva a num2L
+        MOV BX,AX       ;Pasamos la direccion de num1L a BX
+        MOV AX,[BX]     ;Copiamos el valor almacenado en la direccion de BX en AX
+        MOV BX,CX
+        POPF            ;Pasamos la direccion de num2L a BX
+        ADC AX,[BX]     ;Sumamos los High, si en la suma de los low se prendio la flag de carry, se incrementa por 1
+FIN:    POPF
+        POP CX
+        POP BX
+        RET
 
 
 ORG 2000H
-MOV AX,OFFSET NUM1H
-MOV CX,OFFSET NUM2H
+MOV AX,OFFSET NUM1L
+MOV CX,OFFSET NUM2L
 CALL SUM32
 HLT
 END

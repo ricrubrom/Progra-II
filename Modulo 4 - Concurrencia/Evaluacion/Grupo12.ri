@@ -108,7 +108,7 @@ robots
     mientras(sigo)
       Random(randomCa, 1, 100)
       Sembrado(miAv, miCa, randomCa, papeles, sigo)
-      
+    Informar('CantidadDePapeles', papeles)
     EnviarMensaje(ID, RJ)
     EnviarMensaje(papeles, RJ)
   fin

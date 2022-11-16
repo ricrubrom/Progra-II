@@ -74,9 +74,10 @@ areas
   AreaC3 : AreaP(10, 8, 10, 8)
   AreaS1 : AreaP(99, 99, 99, 99)
   AreaS2 : AreaP(99, 100, 99, 100)
+  
+  AreaDeposito : AreaPC(100, 1, 100, 1)
 
   AreaCosecha : AreaC(10, 10, 75, 40)
-  AreaDeposito : AreaC(100, 1, 100, 1)
   AreaSembrado : AreaC(1, 1, 1, 100)
 
 

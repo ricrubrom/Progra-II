@@ -1,0 +1,53 @@
+; Aclaraciones: En AX se almacena la direccion en memoria, y en esa direccion donde se 
+                guardara el resultado, y en CL se almacena cuantas veces lo multiplico
+
+
+; 8 bits/Byte
+
+MULT: PUSH AX           ;Resguardo los datos
+      PUSH BX
+      PUSH CX
+      PUSH DX
+      PUSHF
+      
+      MOV BX, AX        ;Muevo a BX la direccion en memoria
+      MOV Al, [BX]      ;Guardo el valor en Al
+      
+      MOV DX, 0         ;Inicializo el contador en 0
+      
+FOR:  ADD Dl, Al        ;Sumo al contador el numero a multiplicar
+      DEC Cl            ;Decremento las veces que se deben multiplicar
+      JNZ FOR           ;Sigo si no necesito seguir multiplicando
+      
+      MOV [BX], Dl      ;Guardo el valor en memoria
+
+FINMULT: POPF           ;Resguardo los datos
+POP DX
+POP CX
+POP BX
+POP AX
+
+RET
+
+
+; Aclaraciones: En AX se almacena la direccion en memoria, y es donde se guardara el
+                resultado, y en CX se almacena cuantas veces lo multiplico
+
+;16 bits/Word
+
+MULT: PUSH AX
+      PUSH BX
+      PUSH CX
+      PUSH DX
+      PUSHF
+      
+      MOV BX, AX
+      MOV AX, [BX]
+      
+      MOV DX, 0
+      
+FOR:  ADD DX, AX
+      DEC CX
+      JNZ FOR
+      
+      MOV [BX], DX

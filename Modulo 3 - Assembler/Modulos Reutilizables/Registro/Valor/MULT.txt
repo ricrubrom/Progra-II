@@ -1,0 +1,34 @@
+; Aclaraciones: En AL se almacena el numero a multiplicar, en CL se almacena cuantas
+                veces se va a multiplicar y en AH se almacena el resultado
+
+;8 bits/Byte
+
+MULT:       PUSH CX           ;Respaldo los datos de los registros
+            PUSHF
+            MOV AH, 0         ;Inicializo al contador en 0
+      
+FOR:        ADD AH, AL        ;Sumo al contador el numero a multiplicar
+            DEC CL            ;Decremento las veces que quedan para sumar
+            JNZ FOR           ;Si no quedan mas salgo
+
+FINMULT:    POPF
+            POP CX            ;Recupero los datos
+            RET
+
+
+;16 bits/Word
+
+; Aclaraciones: En AX se almacena el numero a multiplicar, en CX se almacena cuantas
+                veces se va a multiplicar y en AX se almacena el resultado
+
+
+MULT:       PUSH CX           ;Respaldo los datos de los registros
+            PUSHF
+            MOV DX, 0         ;Inicializo al contador en 0
+      
+FOR:        ADD DX, AX        ;Sumo al contador el numero a multiplicar
+            DEC CX            ;Decremento las veces que quedan para sumar
+            JNZ FOR           ;Si no quedan mas salgo
+
+FINMULT:    POP CX            ;Recupero los datos
+            RET

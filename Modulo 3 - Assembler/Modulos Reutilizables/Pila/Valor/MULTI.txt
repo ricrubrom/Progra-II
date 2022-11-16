@@ -1,0 +1,22 @@
+;Aclaraciones: Se pushean el valor de los dos numeros antes de llamar a la subrutina
+
+MULT:   PUSH BX         ;Resguardo los datos
+        PUSHF   
+      
+        MOV BX, SP      
+        ADD BX, 8       ;Me muevo a la direccion de la pila donde se encuentra el segundo valor
+      
+        MOV CX, [BX]    ;Guardo el segundo valor en CX
+        ADD BX, 2       ;Me muevo a la direccion de la pila donde se encuentra el primer valor
+        MOV AX, [BX]    ;Guardo el primer valor en AX
+      
+        MOV DX, 0       ;Inicializo el resultado en 0
+      
+FOR:    ADD DX, AX      ;Sumo al resultado el numero a ser multiplicado
+        DEC CX          ;Decremento las veces que tengo que multiplicar
+        JNZ FOR
+      
+
+FINMULT:POPF            ;Recupero los datos 
+        POP BX
+RET

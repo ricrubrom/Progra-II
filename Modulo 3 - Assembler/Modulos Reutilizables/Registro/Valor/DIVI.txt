@@ -1,0 +1,27 @@
+; Aclaraciones: En AL almaceno el dividendo y en CL el divisor. En DL se almacena
+                el cociente y en AL el resto.
+
+
+;8 bits/Byte
+
+DIVI: MOV DL, 0
+
+WHILE:  CMP AL, CL       ;Comparo si es posible seguir dividiendo
+        JS FINDIVI       ;En caso contrario no sigo dividiendo
+        SUB AL, CL       ;Realizo la resta
+        INC DL           ;Aumento el cociente
+        JMP WHILE        ;Sigo dividiendo
+
+
+; Aclaraciones: En AX almaceno el dividendo y en CX el divisor. En DX se almacena
+                el cociente y en AX el resto.
+
+;16 bits/Word
+
+DIVI: MOV DX, 0
+
+WHILE:  CMP AX, CX       ;Comparo si es posible seguir dividiendo
+        JS FINDIVI       ;En caso contrario no sigo dividiendo
+        SUB AX, CX       ;Realizo la resta
+        INC DX           ;Aumento el cociente
+        JMP WHILE        ;Sigo dividiendo

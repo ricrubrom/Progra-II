@@ -1,0 +1,53 @@
+;Aclaraciones:  En AL se guarda el dividendo, en CL el divisor y en BL la direccion en memoria
+                donde se almacena el cociente, si es requerido saber el resto no hay que 
+                pushear AL.
+
+;8 bits/Byte
+
+DIVI:       PUSH AX                 ;Resguardo los registros (En AX se almacena el resto)
+            PUSH CX
+            PUSH DX
+            PUSHF
+      
+            MOV DL, 0               ;Inicializo el contador del cociente en 0
+
+WHILE:      CMP AL, CL              ;Comparo si es posible seguir dividiendo
+            JS FINDIVI              ;En caso contrario no sigo dividiendo
+            SUB AL, CL              ;Realizo la resta
+            INC DL                  ;Aumento el cociente
+            JMP WHILE               ;Sigo dividiendo
+
+FINDIVI:    MOV [BX], DL            ;Almaceno el resultado en memoria (almacenada en BX)
+            POPF                    ;Resguardo los registros y las flags
+            POP DX
+            POP CX
+            POP AX
+            RET
+
+
+
+;Aclaraciones:  En AX se guarda el dividendo, en CX el divisor y en BX la direccion en memoria
+                donde se almacena el cociente, si es requerido saber el resto no hay que 
+                pushear AX.
+
+;16 bits/Word
+
+DIVI: PUSH AX               ;Resguardo los registros (En AX se almacena el resto)
+      PUSH CX
+      PUSH DX
+      PUSHF
+      
+MOV DX, 0                   ;Inicializo el contador del cociente en 0
+
+WHILE: CMP AX, CX           ;Comparo si es posible seguir dividiendo
+JS FINDIVI                  ;En caso contrario no sigo dividiendo
+SUB AX, CX                  ;Realizo la resta
+INC DX                      ;Aumento el cociente
+JMP WHILE                   ;Sigo dividiendo
+
+FINDIVI: MOV [BX], DX       ;Almaceno el resultado en memoria (almacenada en BX)
+POPF                        ;Resguardo los registros y las flags
+POP DX
+POP CX
+POP AX
+RET

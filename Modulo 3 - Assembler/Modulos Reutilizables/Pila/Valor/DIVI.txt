@@ -1,0 +1,52 @@
+;Aclaraciones: Primero se pushea el dividendo, luego el divisor y en DL se almacena el 
+               cociente. El resto se almacena en AL
+
+;8 bits/Byte
+
+DIVI:       PUSH BX         ;Resguardo los valores antes almacenados en los registros 
+            POPF
+        
+            MOV DL, 0       ;Inicializo el contador del cociente en 0
+            MOV BX, SP      ;Muevo a BX a la direccion del tope de la pila
+            ADD BX, 6       ;Muevo a BX a la direccion de la pila donde se encuentra el divisor
+            MOV CL, [BX]    ;Guardo el divisor en CL
+            ADD BX, 2       ;Muevo a BX a la direccion de la pila donde se encuentra el dividendo
+            MOV AL, [BX]    ;Guardo el dividendo en AL
+
+
+WHILE:      CMP AL, CL       ;Comparo si es posible seguir dividiendo
+            JS FINDIVI       ;En caso contrario no sigo dividiendo
+            SUB AL, CL       ;Realizo la resta
+            INC DL           ;Aumento el cociente
+            JMP WHILE        ;Sigo dividiendo
+
+FINDIVI:    POPF
+            POP BX
+
+
+
+
+;Aclaraciones: Primero se pushea el dividendo, luego el divisor y en DX se almacena el 
+               cociente. El resto se almacena en AX
+
+;16 bits/Word
+
+DIVI:       PUSH BX         ;Resguardo los valores antes almacenados en los registros 
+            POPF
+        
+            MOV DL, 0       ;Inicializo el contador del cociente en 0
+            MOV BX, SP      ;Muevo a BX a la direccion del tope de la pila
+            ADD BX, 6       ;Muevo a BX a la direccion de la pila donde se encuentra el divisor
+            MOV CX, [BX]    ;Guardo el divisor en CX
+            ADD BX, 2       ;Muevo a BX a la direccion de la pila donde se encuentra el dividendo
+            MOV AX, [BX]    ;Guardo el dividendo en AX
+
+
+WHILE:      CMP AX, CX       ;Comparo si es posible seguir dividiendo
+            JS FINDIVI       ;En caso contrario no sigo dividiendo
+            SUB AX, CX       ;Realizo la resta
+            INC DX           ;Aumento el cociente
+            JMP WHILE        ;Sigo dividiendo
+
+FINDIVI:    POPF
+            POP BX

@@ -1,0 +1,61 @@
+; Aclaraciones: Se pushean las direcciones en memoria de ambos numeros antes del llamado,
+                se almacena el resultado de la mult. en la direccion del numero que se pushea
+                primero.
+
+;Los dos por pila por referencia
+
+MULT:   PUSH BX         ;Resguardo los datos
+        PUSH DX
+        PUSHF   
+      
+        MOV BX, SP      
+        ADD BX, 8      ;Me muevo a la direccion de la pila donde se encuentra el segundo valor
+        PUSH BX
+        MOV BX, [BX]
+        MOV CX, [BX]    ;Guardo el segundo valor en CX
+        POP BX
+        ADD BX, 2       ;Me muevo a la direccion de la pila donde se encuentra el primer valor
+        MOV BX, [BX]    ;Guardo el primer valor en AX
+        MOV AX, [BX]
+        MOV DX, 0       ;Inicializo el resultado en 0
+      
+FOR:    ADD DX, AX      ;Sumo al resultado el numero a ser multiplicado
+        DEC CX          ;Decremento las veces que tengo que multiplicar
+        JNZ FOR
+      
+
+FINMULT:MOV [BX], DX
+        POPF            ;Recupero los datos 
+        POP DX
+        POP BX
+RET
+
+
+; Aclaraciones: Se pushean primero la direcciones en memoria de del primer numero y luego el valor del 
+                del segundo, se almacena el resultado de la mult. en la direccion del numero que se pushea
+                por referencia.
+
+;El primero por pila por referencia y el segundo por pila por valor
+
+MULT:   PUSH BX         ;Resguardo los datos
+        PUSH DX
+        PUSHF   
+      
+        MOV BX, SP      
+        ADD BX, 8      ;Me muevo a la direccion de la pila donde se encuentra el segundo valor
+        MOV CX, [BX]    ;Guardo el segundo valor en CX
+        ADD BX, 2       ;Me muevo a la direccion de la pila donde se encuentra el primer valor
+        MOV BX, [BX]    ;Guardo el primer valor en AX
+        MOV AX, [BX]
+        MOV DX, 0       ;Inicializo el resultado en 0
+      
+FOR:    ADD DX, AX      ;Sumo al resultado el numero a ser multiplicado
+        DEC CX          ;Decremento las veces que tengo que multiplicar
+        JNZ FOR
+      
+
+FINMULT:MOV [BX], DX
+        POPF            ;Recupero los datos 
+        POP DX
+        POP BX
+RET

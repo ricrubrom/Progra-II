@@ -1,4 +1,34 @@
+
+;Aclaraciones: Se pushean el valor de los dos numeros antes de llamar a la subrutina, se guarda
+               en DL el resultado
+
+;8 bits/Byte
+
+MULT:   PUSH BX         ;Resguardo los datos
+        PUSHF   
+      
+        MOV BX, SP      
+        ADD BX, 8       ;Me muevo a la direccion de la pila donde se encuentra el segundo valor
+      
+        MOV CL, [BX]    ;Guardo el segundo valor en CX
+        ADD BX, 2       ;Me muevo a la direccion de la pila donde se encuentra el primer valor
+        MOV AL, [BX]    ;Guardo el primer valor en AX
+      
+        MOV DL, 0       ;Inicializo el resultado en 0
+      
+FOR:    ADD DL, AL      ;Sumo al resultado el numero a ser multiplicado
+        DEC CL          ;Decremento las veces que tengo que multiplicar
+        JNZ FOR
+      
+
+FINMULT:POPF            ;Recupero los datos 
+        POP BX
+RET
+
+
 ;Aclaraciones: Se pushean el valor de los dos numeros antes de llamar a la subrutina
+
+;16 bits/Word
 
 MULT:   PUSH BX         ;Resguardo los datos
         PUSHF   

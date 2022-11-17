@@ -131,7 +131,6 @@ robots
     Informar('TotalDeFloresRecolectadas', totalFlores)
     EnviarMensaje(1, S1)
     EnviarMensaje(2, S2)
-    
     repetir(2)
       RecibirMensaje(rob, *)
       si(rob = 1)

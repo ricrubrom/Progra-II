@@ -4,16 +4,6 @@ procesos
 
   {Procesos del Cosechador}
   
-  proceso DepositarFlores(E miAv: numero; E miCa: numero)
-  comenzar
-    BloquearEsquina(100, 1)
-    Pos(100, 1)
-    mientras(HayFlorEnLaBolsa)
-      depositarFlor
-    Pos(miAv, miCa)
-    LiberarEsquina(100, 1)
-  fin
-
   proceso JuntarFlores(ES flores: numero)
   comenzar
     mientras(HayFlorEnLaEsquina)
@@ -33,6 +23,16 @@ procesos
     Pos(miAv, miCa)
     LiberarEsquina(randomAv, randomCa)
   fin
+
+  proceso DepositarFlores(E miAv: numero; E miCa: numero)
+  comenzar
+    BloquearEsquina(100, 1)
+    Pos(100, 1)
+    mientras(HayFlorEnLaBolsa)
+      depositarFlor
+    Pos(miAv, miCa)
+    LiberarEsquina(100, 1)
+  fin
   
   
   {Procesos del Sembrador}
@@ -46,24 +46,26 @@ procesos
       papeles := papeles + 1
   fin
   
-  proceso Sembrado(E miAv: numero; E miCa: numero; E randomCa: numero; ES papeles: numero; ES sigo: boolean)
+  proceso Sembrado(E miAv: numero; E miCa: numero; ES papeles: numero; ES sigo: boolean)
+  variables
+    randomCa : numero
   comenzar
+    Random(randomCa, 1, 100)
     BloquearEsquina(100, 1)
     Pos(100, 1)
     si(HayFlorEnLaEsquina)
       tomarFlor
-    sino
-      sigo := F
-    Pos(miAv, miCa)
-    LiberarEsquina(100, 1)
-    
-    si(sigo)
       BloquearEsquina(1, randomCa)
       Pos(1, randomCa)
+      LiberarEsquina(100, 1)
       RecogerElementos(papeles)
       depositarFlor
       Pos(miAv, miCa)
       LiberarEsquina(1, randomCa)
+    sino
+      sigo := F
+      Pos(miAv, miCa)
+      LiberarEsquina(100,1)
   fin
 
 
@@ -98,7 +100,7 @@ robots
 
   robot Sembrador
   variables
-    ID, miAv, miCa, randomCa, papeles: numero
+    ID, miAv, miCa, papeles: numero
     sigo: boolean
   comenzar
     sigo := V
@@ -107,8 +109,7 @@ robots
     miCa := PosCa
     RecibirMensaje(ID, RJ) 
     mientras(sigo)
-      Random(randomCa, 1, 100)
-      Sembrado(miAv, miCa, randomCa, papeles, sigo)
+      Sembrado(miAv, miCa, papeles, sigo)
     Informar('CantidadDePapeles', papeles)
     EnviarMensaje(ID, RJ)
     EnviarMensaje(papeles, RJ)
@@ -130,7 +131,6 @@ robots
     Informar('TotalDeFloresRecolectadas', totalFlores)
     EnviarMensaje(1, S1)
     EnviarMensaje(2, S2)
-    
     repetir(2)
       RecibirMensaje(rob, *)
       si(rob = 1)

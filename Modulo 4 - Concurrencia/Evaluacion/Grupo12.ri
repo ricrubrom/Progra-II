@@ -109,7 +109,7 @@ robots
     miCa := PosCa
     RecibirMensaje(ID, RJ) 
     mientras(sigo)
-      Sembrado(miAv, miCa, randomCa, papeles, sigo)
+      Sembrado(miAv, miCa, papeles, sigo)
     Informar('CantidadDePapeles', papeles)
     EnviarMensaje(ID, RJ)
     EnviarMensaje(papeles, RJ)

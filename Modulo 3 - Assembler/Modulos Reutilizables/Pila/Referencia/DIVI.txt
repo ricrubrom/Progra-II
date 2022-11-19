@@ -1,0 +1,71 @@
+;Aclaraciones: Primero se pushea la direccion en memoria del dividendo, luego la direccion
+               en memoria del divisor, y en la direccion del dividendo se gguarda el cociente.
+               Si se equiere saber el esto es necesario no pushear ni popear AX
+
+;8 bits/Byte
+
+DIVI:       PUSH AX                 ;Resguardo los registros (En AX se almacena el resto)
+            PUSH CX
+            PUSH DX
+            PUSHF
+      
+            MOV DL, 0               ;Inicializo el contador del cociente en 0
+            MOV BX, SP
+            ADD BX, 10
+            PUSH BX
+            MOV BX, [BX]
+            MOV CL, [BX]
+            POP BX
+            ADD BX, 2
+            MOV BX, [BX]
+            MOV AL, [BX]
+
+WHILE:      CMP AL, CL              ;Comparo si es posible seguir dividiendo
+            JS FINDIVI              ;En caso contrario no sigo dividiendo
+            SUB AL, CL              ;Realizo la resta
+            INC DL                  ;Aumento el cociente
+            JMP WHILE               ;Sigo dividiendo
+
+FINDIVI:    MOV [BX], DL            ;Almaceno el resultado en memoria (almacenada en BX)
+            POPF                    ;Resguardo los registros y las flags
+            POP DX
+            POP CX
+            POP AX
+            RET
+
+
+;16 bits/Word 
+
+;Aclaraciones: Primero se pushea la direccion en memoria del dividendo, luego la direccion
+               en memoria del divisor, y en la direccion del dividendo se gguarda el cociente.
+               Si se equiere saber el esto es necesario no pushear ni popear AX
+
+               
+DIVI:       PUSH AX                 ;Resguardo los registros (En AX se almacena el resto)
+            PUSH CX
+            PUSH DX
+            PUSHF
+      
+            MOV DL, 0               ;Inicializo el contador del cociente en 0
+            MOV BX, SP
+            ADD BX, 10
+            PUSH BX
+            MOV BX, [BX]
+            MOV CX, [BX]
+            POP BX
+            ADD BX, 2
+            MOV BX, [BX]
+            MOV AX, [BX]
+
+WHILE:      CMP AX, CX              ;Comparo si es posible seguir dividiendo
+            JS FINDIVI              ;En caso contrario no sigo dividiendo
+            SUB AX, CX              ;Realizo la resta
+            INC DX                  ;Aumento el cociente
+            JMP WHILE               ;Sigo dividiendo
+
+FINDIVI:    MOV [BX], DX            ;Almaceno el resultado en memoria (almacenada en BX)
+            POPF                    ;Resguardo los registros y las flags
+            POP DX
+            POP CX
+            POP AX
+            RET

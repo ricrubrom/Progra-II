@@ -1,4 +1,22 @@
+;Aclaraciones: La subrutina devuelve en CL 01 si el numero es par, y 00 si es impar.
+
+;8 bits/Byte
+
+ORG 3000H 
+ES_PAR:  PUSHF
+         AND CL,1
+         CMP CL,1
+         JZ IMPAR
+PAR:     MOV CL, 01H
+         JMP FIN
+IMPAR:   MOV CL, 00H
+FIN:     POPF
+         RET
+
+
 ;Aclaraciones: La subrutina devuelve en CX 01 si el numero es par, y 00 si es impar.
+
+;16 bits/Word
 
 ORG 3000H 
 ES_PAR:  PUSHF

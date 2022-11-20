@@ -5,10 +5,10 @@
 CONCAR: PUSH BX
         PUSH DX
         PUSHF
-WHILE:  CMP [BX],DL
+WHILE:  CMP [BX], DL                    ;Mientras no se llegue al caracter de terminacion
         JZ FIN
-        INC CL
-        INC BX
+        INC CL                          ;Aumentamos la cantidad de caracteres
+        INC BX                          ;Pasamos a la direccion en memoria del sig. caract.
         JMP WHILE
 FIN:    POPF
         POP DX

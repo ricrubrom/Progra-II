@@ -1,8 +1,28 @@
-;Aclaraciones:  antes del llamado se debe almacenar el dato a comparar. El resultado se guarda en AL
+;Aclaraciones:  antes del llamado se debe almacenar el dato a comparar. 
+                El resultado se guarda en AL (1 SI ES IMPAR, 0 SI ES PAR)
+
+;8 bits/Byte
 
 ES_IMPAR:   PUSH BX
             PUSHF
-            MOV BX, SP              ;Movemos el IP a BX
+            MOV BX, SP              ;Movemos el SP a BX
+            ADD BX, 6H              ;Le sumamos 6 para llegar al dato a analizar
+            MOV AL, [BX]            ;Pasamos el dato a AX
+            AND AL, 1H              ;Aplicamos un AND con una mascara de 1, lo cual devuelve 1 si es impar y 0 si es par
+FIN:        POPF
+            POP BX
+            RET
+
+
+;Aclaraciones:  antes del llamado se debe almacenar el dato a comparar. 
+                El resultado se guarda en AX (1 SI ES IMPAR, 0 SI ES PAR)
+
+;16 bits/Word
+
+
+ES_IMPAR:   PUSH BX
+            PUSHF
+            MOV BX, SP              ;Movemos el SP a BX
             ADD BX, 6H              ;Le sumamos 6 para llegar al dato a analizar
             MOV AX,[BX]             ;Pasamos el dato a AX
             AND AX,1H               ;Aplicamos un AND con una mascara de 1, lo cual devuelve 1 si es impar y 0 si es par

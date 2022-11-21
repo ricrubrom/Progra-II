@@ -13,10 +13,9 @@ ES_VOCAL: PUSH AX                                   ;Guardamos el dato
 
 ITERO:    CMP AL, [BX]                              ;Comparo la letra con una vocal
           JZ ES_VOC                                 ;Si es vocal, salto a asignar el Resultado
-          CMP AH, 0                                 ;Si no existen mas vocales que comparar, salimos de la iteracion
-          JZ FINRUT                                 
           INC BX                                    ;Nos movemos en la tabla de vocales
           DEC AH                                    ;Decrementamos indicando que queda una vocal menos que comparar
+          JZ FINRUT                                 
           JMP ITERO
 
 ES_VOC:  MOV DH, 0FFH                               ;Si es vocal guardo el Resultado

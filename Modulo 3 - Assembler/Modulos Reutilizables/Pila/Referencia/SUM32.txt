@@ -1,29 +1,29 @@
-;Aclaraciones:  BX guarda NUM1L, el resultado se guarda en NUM1L y NUM1H
+Aclaraciones: pushear NUM1H primero, luego NUM1L
 
 SUM32:  PUSHF
-        PUSH AX
-        PUSH BX
         PUSH CX
         PUSH DX
-        
+        MOV BX, SP
+        ADD BX, 8
         PUSH BX
+        MOV BX, [BX]
         MOV AX, [BX]
-        ADD BX, 4
-        MOV CX, [BX]
+        POP BX
         ADD BX, 2
-        MOV DX, [BX]
-        SUB BX, 4
+        MOV BX, [BX]
         MOV BX, [BX]
         ADD AX,CX       ;Sumamos los Low
         ADC DX, BX      ;Sumamos los High, y si en la operacion anterior hubo carry, se suma 1
-        POP BX
+FIN:    MOV BX, SP
+        ADD BX, 8
+        PUSH BX
+        MOV BX, [BX]
         MOV [BX], AX
-        ADD BX, 2
-        MOV [BX], DX
-        
-FIN:    POP DX
-        POP CX
         POP BX
-        POP AX
+        ADD BX, 2
+        MOV BX, [BX]
+        MOV [BX], DX
+        POP DX
+        POP CX
         POPF
         RET

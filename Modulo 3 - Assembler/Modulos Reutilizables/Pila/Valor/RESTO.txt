@@ -1,0 +1,18 @@
+Aclaraciones: Primero pushear el divisor, luego el numero a dividir. DL guarda el resultado.
+
+
+RESTO:  PUSH CX
+        PUSHF
+        MOV BX, SP
+        ADD BX, 6
+        MOV DL, [BX]
+        ADD BX, 2
+        MOV CL, [BX]
+WHILE:  CMP DL, CL      ;Comparamos si el numero es mayor al divisor
+        JS FIN          ;Si el divisor es mayor al numero, no podemos seguir dividiendo y vamos a fin
+        SUB DL, CL      ;En caso contrario restamos al numero el divisor
+        JMP WHILE       ;Saltamos para repetir la instrucciones
+
+FIN:    POPF
+        POP CX
+        RET

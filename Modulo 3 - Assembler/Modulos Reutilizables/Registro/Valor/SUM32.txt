@@ -4,4 +4,5 @@
 SUM32:  PUSHF
         ADD AX,CX       ;Sumamos los Low
         ADC BX, DX      ;Sumamos los High, y si en la operacion anterior hubo carry, se suma 1
-FIN:    RET
+FIN:    POPF
+        RET

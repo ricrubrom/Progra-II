@@ -1,0 +1,38 @@
+;Aclaraciones:  Pushear el numero a rotar antes del llamado, AL tiene la cantidad de veces a rotar a la derecha
+
+
+ROTARIZQ:   PUSH AX                                     ;Guardamos Datos
+            PUSH CX
+            PUSHF
+
+            MOV AL, [BX]                                ;Guardamos el numero en AX
+FOR2:       ADD AL, AL                                  ;Duplicamos el numero (Rotar a la izquierda)
+            JNC SIG                                     ;Si se prende el carry, sumamos uno
+            INC AL
+SIG:        DEC CH                                      ;Decrementamos CH (Cantidad de rotaciones a izquierda)
+            JNZ FOR2                                    ;Mientras queden rotaciones, saltamos al FOR
+FIN2:       MOV [BX], AL                                ;Guardamos el numero rotado en memoria
+
+            POPF                                        ;Recuperamos Datos
+            POP CX
+            POP AX
+            RET
+
+
+ROTARDER:   PUSH BX
+            PUSH CX
+            PUSHF
+
+            MOV BX, SP
+            ADD BX, 8                                  ;Me muevo a la direccion en la pila donde esta el numero
+            MOV BX, [BX]                                ;Guardo en BX la direccion del numero
+
+            MOV CH, 7                                   ;Cantidad de rotaciones a la izquierda
+FOR3:       CALL ROTARIZQ                               ;Rotamos a la derecha
+            DEC AL                                      ;Decrementamos AL (Contador de rotaciones a la derecha)
+            JNZ FOR3                                    ;Mientras queden rotaciones, saltamos al FOR2
+
+FIN3:       POPF                                        ;Recuperamos Datos
+            POP CX
+            POP BX
+            RET
